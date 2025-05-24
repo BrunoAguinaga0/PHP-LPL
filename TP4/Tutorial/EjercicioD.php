@@ -8,29 +8,32 @@
 </head>
 <body>
     <?php
-    $multiplicador = 2;
-    echo "<div class='contenedor'>";
-    echo "<table>";
-    echo "<tr>";
-    for ($i=0;$i<11;$i++){
-        if ($i == 0){
-            echo "<th>*</th>";
-        }else{
-            echo "<th>$i</th>";
+    for ($j=1;$j<11;$j++){
+        echo "<div class='contenedor'>";
+        $multiplicador = $j;
+        echo "<h3>Tabla de multiplicar del $multiplicador</h3>";
+        echo "<table>";
+        echo "<tr>";
+        for ($i=0;$i<11;$i++){
+            if ($i == 0){
+                echo "<th>*</th>";
+            }else{
+                echo "<th>$i</th>";
+            }
         }
-    }
-    echo "</tr>";
-    echo "<tr>";
-    for ($i=0;$i<11;$i++){
-        if ($i == 0){
-            echo "<th>$multiplicador</th>";
-        }else{
-            echo "<th>".$i*$multiplicador."</th>";
+        echo "</tr>";
+        echo "<tr>";
+        for ($i=0;$i<11;$i++){
+            if ($i == 0){
+                echo "<th>$multiplicador</th>";
+            }else{
+                echo "<th>".$i*$multiplicador."</th>";
+            }
         }
+        echo "</tr>";
+        echo "</table>";
+        echo "</div>";
     }
-    echo "</tr>";
-    echo "</table>";
-    echo "</div>";
     ?>
 
 </body>
