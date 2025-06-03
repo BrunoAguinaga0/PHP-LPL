@@ -1,0 +1,13 @@
+body {
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+td{
+    padding: 5px;
+    border:  2px solid black;
+    border-collapse: collapse;
+}
