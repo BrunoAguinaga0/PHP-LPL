@@ -38,3 +38,9 @@ div{
     flex-direction: column;
     justify-content: center;
 }
+
+#tablas{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

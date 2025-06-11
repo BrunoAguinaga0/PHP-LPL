@@ -1,0 +1,49 @@
+body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, rgb(231, 154, 183), rgb(148, 183, 235));
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section{
+    width: 100%;
+    max-width: 600px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+input {
+    width: 200px;
+    padding: 10px;
+    border: 2px solid #8b1a1a;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+label {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+p {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+}

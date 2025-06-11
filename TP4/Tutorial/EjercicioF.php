@@ -10,6 +10,9 @@
     <?php
         srand((double)microtime() * 10000000);
         $num = rand(2,15);
+        for (i=5; i<=100, i++){
+            
+        }
         $numAux = 0;
         echo "<table>";
         for ($i = 0; $numAux < $num; $i++){
