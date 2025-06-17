@@ -1,0 +1,104 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(120deg, #ffd8b0 0%, #ffe5c2 40%, #bdbdbd 100%);
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: #f7fafc; /* fondo clarito */
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 90vh;      /* Limita el LARGO de la tabla */
+    overflow-y: auto;      /* Agrega scroll si es necesario */
+    display: block;        /* Necesario para overflow-y */
+}
+
+th, td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 16px;
+    word-break: break-word; /* Evita desbordes de texto */
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+th {
+    background: #f0f4f8;
+    font-weight: 600;
+    color: #333;
+}
+
+tr:hover {
+    background: #f0eded;
+    transition: background 0.2s;
+}
+
+form {
+    width: 30vw;
+    height: 86vh;
+    display: flex ;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 15px;
+    gap: 7px;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.223);
+}
+
+label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #2c5485;
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+    display: block;
+}
+
+input {
+    border-radius: 5px;
+    padding: 2%;
+    border: 2px solid #ccc;
+    transition: border-color 0.3s;
+}
+input:focus {
+    border-color: rgb(255, 147, 5);
+    outline: none;
+}
+
+input[type="submit"]{
+    color:#2c5485;
+}
+input[type="submit"]:hover {
+    background-color: #da7b0f88;
+}
+
+h2 {
+    color:rgb(37, 67, 77);
+    font-size: xx-large;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+button{
+    border-radius: 5px;
+    padding: 1%;
+    margin-bottom: 8px;
+    border: 2px solid #ccc;
+    transition: border-color 0s;
+}
+button:hover {
+    border-color: rgb(255, 147, 5);
+    outline: none;
+}
