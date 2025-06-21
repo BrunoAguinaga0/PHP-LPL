@@ -5,13 +5,13 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(120deg, #ffd8b0 0%, #ffe5c2 40%, #bdbdbd 100%);
+    background: linear-gradient(120deg, #ff7300dd 0 0%, #e3b16f 40%, #ff7402c4 100%);
 }
 
 table {
     border-collapse: separate;
     border-spacing: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.244);
     background: #f7fafc; /* fondo clarito */
     border-radius: 8px;
     overflow: hidden;
@@ -45,7 +45,7 @@ tr:hover {
 
 form {
     width: 30vw;
-    height: 86vh;
+    height: 90vh;
     display: flex ;
     flex-direction: column;
     background-color: #ffffff;
@@ -80,6 +80,7 @@ input[type="submit"]{
 }
 input[type="submit"]:hover {
     background-color: #da7b0f88;
+    border-color: rgb(255, 147, 5);
 }
 
 h2 {
@@ -92,6 +93,7 @@ h2 {
 }
 
 button{
+    color: #2c5485;
     border-radius: 5px;
     padding: 1%;
     margin-bottom: 8px;
@@ -99,6 +101,15 @@ button{
     transition: border-color 0s;
 }
 button:hover {
+    background-color: #da7b0f88;
     border-color: rgb(255, 147, 5);
     outline: none;
+}
+
+
+.formulario1{
+    display: inline;
+    margin: 0;
+    box-shadow: none;
+    padding: 0;
 }
