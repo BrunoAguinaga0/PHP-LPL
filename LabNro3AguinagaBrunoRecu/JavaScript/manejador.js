@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
-    fetch("enviarProductos.php")
+    fetch("../PHP/enviarProductos.php")
     .then(response => response.json())
     .then(data => {
         var datalist = document.getElementById("ListaProductos");
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function(){
     })
 
     function buscar(){
-        peticion.open("GET", "back.php?criterio=" + localStorage.getItem("criterio") + "&filtro=" + localStorage.getItem("filtro") + "&busqueda=" + busqueda.value + "&ubicacion=" + localStorage.getItem("ubicacion"), true);
+        peticion.open("GET", "../PHP/back.php?criterio=" + localStorage.getItem("criterio") + "&filtro=" + localStorage.getItem("filtro") + "&busqueda=" + busqueda.value + "&ubicacion=" + localStorage.getItem("ubicacion"), true);
         peticion.onreadystatechange = function(){
         if (peticion.readyState == 4 && peticion.status == 200){
             var resultado = JSON.parse(peticion.responseText);
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function(){
                         td3.innerHTML = element.supermercado;
                         td4.innerHTML = element.ubicacion;
                         a.innerHTML = "Ver Detalles";
-                        a.href = "detalle.php?nombre=" + element.producto + "&criterio=" + localStorage.getItem("criterio") + "&filtro=" + localStorage.getItem("filtro") + "&ubicacion=" + localStorage.getItem("ubicacion");
+                        a.href = "../PHP/detalle.php?nombre=" + element.producto + "&criterio=" + localStorage.getItem("criterio") + "&filtro=" + localStorage.getItem("filtro") + "&ubicacion=" + localStorage.getItem("ubicacion");
                         td5.appendChild(a);
                         tr.appendChild(td);
                         tr.appendChild(td2);
