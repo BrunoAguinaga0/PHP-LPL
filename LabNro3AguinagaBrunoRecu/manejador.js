@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function(){
+    fetch("enviarProductos.php")
+    .then(response => response.json())
+    .then(data => {
+        var datalist = document.getElementById("ListaProductos");
+        data.forEach(element => {
+            var option = document.createElement("option");
+            option.value = element.nombre;
+            datalist.appendChild(option);
+        });
+    })
+    .catch(error => console.error('Error al cargar los productos:', error));
     var criterio = document.getElementById("criterio");
     var filtro = document.getElementById("filtro")
     var busqueda = document.getElementById("busqueda")
@@ -16,8 +27,16 @@ document.addEventListener("DOMContentLoaded", function(){
         if (criterio.value === "2"){
             busqueda.disabled = false;
             ubicacion.disabled = false;
+            filtro.disabled = true;
             tabla.innerHTML = "";
         }
+        else if (criterio.value === "1"){
+            busqueda.disabled = false;
+            ubicacion.disabled = true;
+            filtro.disabled = false;
+            tabla.innerHTML = "";
+        }
+        encontrado = false;
     })
     filtro.addEventListener("change", function(){
         localStorage.setItem("filtro", filtro.value)
@@ -30,19 +49,18 @@ document.addEventListener("DOMContentLoaded", function(){
             ubicacion.disabled = false;
             tabla.innerHTML = "";
         }
+        encontrado = false;
     })
     ubicacion.addEventListener("change", function(){
+        encontrado = false;
+        tabla.innerHTML = "";
         localStorage.setItem("ubicacion", ubicacion.value)
         buscar();
     })
 
     busqueda.addEventListener("keyup", function(){
-        if (busqueda.value === "") {
-            tabla.innerHTML = "";
-            encontrado = false;
-        }
-        var error = document.getElementById("error")
-        error.innerHTML = "";
+        encontrado = false;
+        tabla.innerHTML = "";
         buscar();
     })
 
@@ -52,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function(){
         if (peticion.readyState == 4 && peticion.status == 200){
             var resultado = JSON.parse(peticion.responseText);
             if (resultado.length === 0){
-                error.innerHTML = "No se encontraron resultados";
                 tabla.innerHTML = "";
             }else{                
                 if (!encontrado){
@@ -63,14 +80,20 @@ document.addEventListener("DOMContentLoaded", function(){
                         var td2 = document.createElement("td");
                         var td3 = document.createElement("td");
                         var td4 = document.createElement("td");
+                        var td5 = document.createElement("td");
+                        var a = document.createElement("a");
                         td.innerHTML = element.producto;
                         td2.innerHTML = element.precio;
                         td3.innerHTML = element.supermercado;
                         td4.innerHTML = element.ubicacion;
+                        a.innerHTML = "Ver Detalles";
+                        a.href = "detalle.php?nombre=" + element.producto + "&criterio=" + localStorage.getItem("criterio") + "&filtro=" + localStorage.getItem("filtro") + "&ubicacion=" + localStorage.getItem("ubicacion");
+                        td5.appendChild(a);
                         tr.appendChild(td);
                         tr.appendChild(td2);
                         tr.appendChild(td3);
                         tr.appendChild(td4);
+                        tr.appendChild(td5);
                         tabla.appendChild(tr);
                     });
                 }

@@ -28,7 +28,6 @@ class Producto{
         return $this->supermercado;
     }
 
-
     public static function buscarProducto($produ){
         $bd = new ConexionBD("comparador");
         $bd->conectar();
@@ -74,6 +73,25 @@ class Producto{
                 $ubicacionSuper = $productoBD->UBICACION;
                 $producto = new Producto($nombreProducto, $precioProducto, $ubicacionSuper, $nombreSuper);
                 $productos[] = $producto;
+            }
+        }else {
+            $productos = null;
+        }
+        $resultado->free();
+        $bd->desconectar();
+        return $productos;
+    }
+
+    public static function getProductos(){
+        $bd = new ConexionBD("comparador");
+        $bd->conectar();
+        $conexion = $bd->getConexion();
+        $query = "SELECT nombre FROM producto";
+        $resultado = $conexion->query($query) or die("Error al realizar la consulta: " . $conexion->error);
+        if ($resultado->num_rows > 0) {
+            while ($productoBD = $resultado->fetch_object()){
+                $nombreProducto = $productoBD->nombre;
+                $productos[] = $nombreProducto;
             }
         }else {
             $productos = null;

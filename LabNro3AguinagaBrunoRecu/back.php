@@ -37,7 +37,7 @@ if ($criterio == "1"){
     }
     echo json_encode($listaProductos);
 }else if ($criterio == "2"){
-    $productos = Producto::getProductoPorNombre($busqueda);
+    $productos = Producto::buscoCombinado($busqueda, $ubicacion);
     if (is_null($productos)){
         $listaProductos = [];
     }else{
@@ -48,7 +48,6 @@ if ($criterio == "1"){
                 "ubicacion" => $producto->getUbicacion(),
                 "supermercado" => $producto->getSupermercado()
             ];
-            array_push($listaProductos, $productoLista);
         }
     }
     echo json_encode($listaProductos);

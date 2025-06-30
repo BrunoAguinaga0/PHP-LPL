@@ -27,7 +27,8 @@
             </div>
             <div id ="buscador">
                 <label for="busqueda">Buscador</label>
-                <input type="text" id="busqueda" name="busqueda" placeholder="Realiza una busqueda">
+                <input list="ListaProductos" type="text" id="busqueda" name="busqueda" placeholder="Realiza una busqueda">
+                <datalist id="ListaProductos"></datalist>
                 <label for="ubicacion">Seleccione la ubicacion:</label>
                 <select id="ubicacion" name="ubicacion">
                     <option value="Centro" selected>Centro</option>
@@ -44,6 +45,7 @@
                     <th>Precio</th>
                     <th>Supermercado</th>
                     <th>Ubicacion</th>
+                    <th>Detalles</th>
                     </tr>
                 </thead>
                 <tbody id="cuerpo"></tbody>
