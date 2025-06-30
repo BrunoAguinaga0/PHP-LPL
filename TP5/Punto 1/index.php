@@ -1,13 +1,18 @@
 <?php
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['idInmueble'])) {
+    if (isset($_POST['idInmueble']) && isset($_POST['Editar'])) {
         $idInmueble = $_POST['idInmueble'];
         $_SESSION['idInmueble'] = $idInmueble;
         header("Location: editar.php");
         exit();
-    }else{
-        echo "No se ha proporcionado un ID de inmueble.";
+    }
+    if (isset($_POST['Eliminar']) && isset($_POST['idInmueble'])) {
+        $idInmueble = $_POST['idInmueble'];
+        $conexion = new mysqli("localhost","root","", "inmobilaria") or die("No se pudo conectar a la Base de Datos.");
+        $query = "DELETE FROM inmueble WHERE idInmueble = $idInmueble";
+        $resultado = $conexion->query($query) or die("No se pudo ejecutar la consulta.");
+        $conexion->close();
     }
 }
 ?>
@@ -23,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section>
         <article>
             <button type="button" onclick="window.location.href='formulario.php'">Volver al Formulario</button>
+            <button type="button" onclick="window.location.href='alquileres.php'">Inmuebles en Alquiler</button>
             <?php
                 $conexion = new mysqli("localhost","root","", "inmobilaria") or die("No se pudo conectar a la Base de Datos.");
                 $query = "SELECT * FROM inmueble ORDER BY idInmueble DESC LIMIT 10";
@@ -30,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($resultado->num_rows>0){
                     ?>
                     <table>
-                        <tr><th>ID Inmueble</th><th>Tipo de Inmueble</th><th>Domicilio</th><th>Dormitorios</th><th>Mejoras</th><th>Baños</th><th>Observacion</th><th>Editar</th></tr>
+                        <tr><th>ID Inmueble</th><th>Tipo de Inmueble</th><th>Domicilio</th><th>Dormitorios</th><th>Mejoras</th><th>Baños</th><th>Observacion</th><th>Editar</th><th>Eliminar</th></tr>
                     <?php
                     while($fila = $resultado->fetch_object()){
                         $idInmueble = $fila->idInmueble;
@@ -44,7 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo "<td>";?>
                         <form class='formulario1' method='post' action='index.php'>
                             <input type='hidden' name='idInmueble' value="<?php echo $idInmueble;?>">
-                            <input type='submit' value='Editar'>
+                            <input type='submit' name='Editar' value='Editar'>
+                        </form></td>
+                        <td>
+                        <form class='formulario1' method='post' action='index.php'>
+                            <input type='hidden' name='idInmueble' value="<?php echo $idInmueble;?>">
+                            <input type='submit' name='Eliminar' value='Eliminar'>
                         </form></td></tr>
                         <?php
                     }

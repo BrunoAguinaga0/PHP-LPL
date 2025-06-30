@@ -4,7 +4,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     background: linear-gradient(120deg, #ff7300dd 0 0%, #e3b16f 40%, #ff7402c4 100%);
 }
 
@@ -15,7 +14,7 @@ table {
     background: #f7fafc; /* fondo clarito */
     border-radius: 8px;
     overflow: hidden;
-    max-height: 90vh;      /* Limita el LARGO de la tabla */
+    max-height: 70vh;      /* Limita el LARGO de la tabla */
     overflow-y: auto;      /* Agrega scroll si es necesario */
     display: block;        /* Necesario para overflow-y */
 }
@@ -112,4 +111,35 @@ button:hover {
     margin: 0;
     box-shadow: none;
     padding: 0;
+}
+
+#h1Alquiler{
+    display: block;
+    background-color: #efeded;
+    border-radius: 15px;
+    color: #333;
+    border: 2px solid #ff9409;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.244);
+    gap: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: xx-large;
+}
+
+
+#formAlquiler {
+    width: 6rem;
+    height: 3rem;
+    display: flex ;
+    flex-direction: row;
+    background-color: transparent;
+    padding: 0;
+    padding-top: 15px;
+    border-radius: 15px;
+    gap: 5px;
+    box-shadow: none;
 }

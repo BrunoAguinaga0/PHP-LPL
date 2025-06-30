@@ -1,0 +1,16 @@
+.borde {
+	border-width: 1px; 
+	border-color: #993300; 
+	border-style: solid; 
+	border-collapse: collapse;
+}
+
+table {
+	width: 400px;  
+	text-align: left;
+}
+
+.fondo {
+	background-color: #993300;
+	color: white;
+}

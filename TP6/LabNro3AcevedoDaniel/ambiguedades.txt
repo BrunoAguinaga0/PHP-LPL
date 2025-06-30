@@ -1,0 +1,2 @@
+El datalist del input si lo clickeas te autocompleta la palabra pero no busca.
+Habria que escribir la palabra completa para que se concrete la consulta.
