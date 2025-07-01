@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="../JavaScript/buscarCiudades.js" defer></script>
+    <script src="../JavaScript/manejador.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>RAIL EUROPE</h1>
+        <p>Consulta de servicios de tren</p>
+    </header>
+    <section>
+        <div id="filtros">
+            <label for="ciudadOrigen"><strong>Origen</strong></label>
+            <select id="ciudadOrigen">
+                <option value="true" selected>Sin Origen</option>
+            </select>
+            <label for="ciudadDestino"><strong>Destino</strong></label>
+            <select id="ciudadDestino">
+                <option value="true" selected>Sin Destino</option>
+            </select>
+            <button id="buscar">Buscar</button>
+        </div>
+        <p id="mensaje"></p>
+        <article>
+        </article>
+        <article>
+        </article>
+    </section>
+</body>
+</html>
