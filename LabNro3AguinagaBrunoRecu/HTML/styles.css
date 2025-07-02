@@ -13,7 +13,6 @@ article{
 table {
     width: 100%;
     background-color: rgb(241, 240, 238);
-    width: 40%;
     margin-top: 10px;
     border-collapse: separate;
     border-spacing: 0;
@@ -23,7 +22,6 @@ table {
 }
 
 th, td {
-    width: 20%;
     border: 1px solid #e0e0e0;
     align-items: center;
     border-bottom: 1px solid #e0e0e0;

@@ -35,11 +35,7 @@ class Empresa {
         $bd = new ConexionBD("raileurope");
         $bd->conectar();
         $conexion = $bd->getConexion();
-        $query = "SELECT e.nombreEmpresa as NOMBRE, e.paisEmpresa as PAIS, e.webEmpresa as WEB, e.logoEmpresa as LOGO, COUNT(s.idServicio) AS SERVICIOS 
-                    FROM empresas e
-                    JOIN servicios s ON e.idEmpresa = s.idEmpresa
-                    WHERE s.ciudadOrigenServicio = '$origen' AND s.ciudadDestinoServicio = '$destino'
-                    GROUP BY e.idEmpresa";
+        $query = self::tipoQuery($origen, $destino);
         $resultado = $conexion->query($query) or die("Error en la consulta: " . $conexion->error);
         if ($resultado->num_rows > 0){
             while ($empresaBD = $resultado->fetch_object()){
@@ -49,6 +45,29 @@ class Empresa {
             $empresas = null;
         }
         return $empresas;
+    }
+
+    private static function tipoQuery($origen, $destino) {
+        if ($origen != "true" && $destino != "true") {
+            $query = "SELECT e.nombreEmpresa as NOMBRE, e.paisEmpresa as PAIS, e.webEmpresa as WEB, e.logoEmpresa as LOGO, COUNT(s.idServicio) AS SERVICIOS 
+                        FROM empresas e
+                        JOIN servicios s ON e.idEmpresa = s.idEmpresa
+                        WHERE s.ciudadOrigenServicio = '$origen' AND s.ciudadDestinoServicio = '$destino'
+                        GROUP BY e.idEmpresa";
+        }else if($origen != "true"){
+            $query = "SELECT e.nombreEmpresa as NOMBRE, e.paisEmpresa as PAIS, e.webEmpresa as WEB, e.logoEmpresa as LOGO, COUNT(s.idServicio) AS SERVICIOS 
+                        FROM empresas e
+                        JOIN servicios s ON e.idEmpresa = s.idEmpresa
+                        WHERE s.ciudadOrigenServicio = '$origen'
+                        GROUP BY e.idEmpresa";
+        }else{
+            $query = "SELECT e.nombreEmpresa as NOMBRE, e.paisEmpresa as PAIS, e.webEmpresa as WEB, e.logoEmpresa as LOGO, COUNT(s.idServicio) AS SERVICIOS 
+                        FROM empresas e
+                        JOIN servicios s ON e.idEmpresa = s.idEmpresa
+                        WHERE s.ciudadDestinoServicio = '$destino'
+                        GROUP BY e.idEmpresa";
+        }
+        return $query;
     }
 }
 

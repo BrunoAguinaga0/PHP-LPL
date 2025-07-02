@@ -4,12 +4,12 @@ $origen = $_GET['origen'];
 $destino = $_GET['destino'];
 $empresas = Empresa::buscarEmpresas($origen, $destino);
 
-if (is_null($empresas)) {    
+if (!is_null($empresas)) {    
     foreach($empresas as $empresa) {
         $arrayEmpresas[] = $empresa;
     }
 }else{
     $arrayEmpresas = [];
 }
-echo json_encode($empresas);
+echo json_encode($arrayEmpresas);
 ?>
