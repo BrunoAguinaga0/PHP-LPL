@@ -1,5 +1,5 @@
 html{
-    background-color: white;
+    background-color: rgb(177, 230, 232);
 }
 
 article{
@@ -11,7 +11,7 @@ article{
 }
 
 table {
-    width: 100%;
+    width: 60%;
     background-color: rgb(241, 240, 238);
     margin-top: 10px;
     border-collapse: separate;
