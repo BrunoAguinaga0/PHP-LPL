@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="../JavaScript/buscarEmpresas.js" defer></script>
+    <script src="../JavaScript/manejador.js" defer></script>
+</head>
+<body>
+    <header><h1>Servicios Micros Larga Distancia</h1></header>
+    <section>
+        <article id ="filtros">
+            <label for="empresa">Seleccione una Empresa</label>
+            <select id="empresa">
+                <option value="true" selected>Seleccione una Empresa</option>
+            </select>
+            <label for="dias">Seleccione un dia de la semana</label>
+            <select id="dias">
+                <option value="true" selected>Seleccione un dia</option>
+                <option value="operaLU">Lunes</option>
+                <option value="operaMA">Martes</option>
+                <option value="operaMI">Miercoles</option>
+                <option value="operaJU">Jueves</option>
+                <option value="operaVI">Viernes</option>
+                <option value="operaSA">Sabado</option>
+                <option value="operaDO">Domingo</option>
+            </select>
+            <button id="btnBuscar">Buscar</button>
+        </article>
+        <article id="principal">
+            <table id="tabla">
+                <thead>
+                    <tr>
+                        <th>Id Servicio</th>
+                        <th>Ciudad Origen</th>
+                        <th>Ciudad Destino</th>
+                        <th>Horario Salida</th>
+                        <th>Horario Llegada</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo">
+                </tbody>
+            </table>
+        </article>
+        <article>
+            <div id="miModal" class="modal">
+                <div class="modal-contenido">
+                    <span id="cerrarModal" class="cerrar">x</span>
+                    <h2>Detalles del Servicio</h2>
+                    <p><strong>Dias que opera: </strong><span id="diasOperan"></span></p>
+                    <div>
+                        <p><strong>Cantidad de asientos Semi Cama:</strong>  <span id="semiCama"></span></p></p>
+                        <p><strong>Precio de asientos Semi Cama: </strong><span id="precioSemiCama"></span></p>
+                    </div>
+                    <div>
+                        <p><strong>Cantidad de asientos Cama: </strong><span id="cama"></span></p>
+                        <p><strong>Precio de asientos Cama: </strong><span id="precioCama"></span></p>
+                    </div>
+                    <p><strong>Web Empresa: </strong><span id="webEmpresa"></span></p>
+                </div>
+            </div>
+        </article>
+    </section>
+</body>
+</html>
