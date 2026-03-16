@@ -2,42 +2,36 @@
 class JugadorDAO{
     private $bd;
     public function __construct($baseDatos){
-        $this->bd = $baseDatos->getConexion();
+        $this->bd = $baseDatos;
     }
     public function autenticarJugador ($nombre, $contrasenia){
-        $sql = "SELECT * FROM jugadores WHERE nombre = ?";
-        $stmt = $this->bd->prepare($sql);
-        $stmt->bind_param("s", $nombre);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        if ($jugador = $resultado->fetch_object()) {
-            if (password_verify($contrasenia, $jugador->password_jugador)) {
+        $sql = "SELECT * FROM jugadores WHERE nombre_jugador = ? LIMIT 1";
+        $resultado = $this->bd->bd_consulta($sql, "s", [$nombre]);
+        if (!empty($resultado)) {
+            $jugador = $resultado[0];
+            if (password_verify($contrasenia, $jugador["password_jugador"])) {
                 return $jugador;
             }
         }
         return null;
         }
     public function registrarJugador($nombre, $contrasenia){
-        $this->bd->begin_transaction();
+        $this->bd->comenzar_transaccion();
+        $sql = "INSERT INTO jugadores (nombre_jugador, password_jugador) VALUES (?, ?)";
         $hash = password_hash($contrasenia, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO jugadores (nombre, password_jugador) VALUES (?, ?)";
-        $stmt = $this->bd->prepare($sql);
-        $stmt->bind_param("ss", $nombre, $hash);
-        if($stmt->execute()){
-            $this->bd->commit();
-            return $this->bd->insert_id;
-        }else{
-            $this->bd->rollback();
-            return false;
-        }
+        $resultado = $this->bd->bd_insertar($sql, "ss", [$nombre, $hash]);
+        if($resultado){
+            $id = $this->bd->insert_id();
+            $this->bd->confirmar_transaccion();
+            return $id;
+            }
+        $this->bd->cancelar_transaccion();
+        return false;
     }
     public function existeUsuario($nombre){
-        $sql = "SELECT * FROM jugadores WHERE nombre = ?";
-        $stmt = $this->bd->prepare($sql);
-        $stmt->bind_param("s", $nombre);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        return $resultado->num_rows > 0;
+        $sql = "SELECT id_jugador FROM jugadores WHERE nombre_jugador = ? LIMIT 1";
+        $resultado = $this->bd->bd_consulta($sql, "s", [$nombre]);
+        return count($resultado) > 0;
     }
         }
 ?>

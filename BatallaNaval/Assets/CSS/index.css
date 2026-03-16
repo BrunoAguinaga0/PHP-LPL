@@ -27,7 +27,12 @@ body {
     width: 90vh;
     max-width: 330px;
     text-align: center;
-    height: 55vh;
+    height: auto;
+    min-height: auto; /* Esto garantiza que no sea más chico que antes */
+    height: auto;     /* Esto permite que crezca si el contenido lo empuja */
+    
+    display: flex;    /* Agregamos esto para que el contenido fluya bien */
+    flex-direction: column;
 }
 
 h1 {
@@ -140,5 +145,19 @@ input:focus {
 }
 
 .register-card{
-    height: 68vh;
+    height: auto;
+    height: auto;
+}
+
+.error-message {
+    margin-top: -0.8rem;
+    color: #f87171;
+    background-color: rgba(248, 113, 113, 0.1);
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(248, 113, 113, 0.2);
+    width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
 }

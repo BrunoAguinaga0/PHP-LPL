@@ -3,20 +3,20 @@ document.getElementById("register-button").addEventListener("click", function(ev
     const pass2 = document.getElementById('confirm_password').value;
     const error = document.getElementById("error-mensaje");
     const form = document.getElementById("register-form");
+    const error_servidor = document.getElementById("error-servidor");
+
     if(error) {
-        form.style.height = '68vh';
         error.remove();
+    }
+    if(error_servidor) {
+        error_servidor.remove();
     }
     if (pass1 !== pass2) {
         event.preventDefault();
         const mensajeError = document.createElement("p");
         mensajeError.id = "error-mensaje";
+        mensajeError.className = "error-message";
         mensajeError.textContent = "Marinero, las contraseñas no coinciden!";;
-        mensajeError.style.color = 'red';
-        mensajeError.style.fontSize = '0.9rem';
-        mensajeError.style.marginTop = '10px';
-        mensajeError.style.textAlign = 'center';
-        form.style.height = '71vh';
         const btnRegistrar = document.getElementById("register-button");
         btnRegistrar.parentNode.insertBefore(mensajeError, btnRegistrar);
         

@@ -12,7 +12,7 @@ if (isset($_SESSION['id_usuario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../Assets/CSS/index.css">
+    <link rel="stylesheet" href="../Assets/CSS/index.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -30,16 +30,16 @@ if (isset($_SESSION['id_usuario'])) {
             </div>
             <div class="input-group">
                 <label>Confirmar Contraseña:</label>
-                <input type="password" id="confirm_password" name="confirmar_contrasenia" placeholder="Contraseña"
+                <input  type="password" id="confirm_password" name="confirmar_contrasenia" placeholder="Contraseña"
                     required>
             </div>
             <?php
                 if (isset($_SESSION["error_usuario"])) {
-                    echo '<p class="error-message">' . $_POST["error_usuario"] . '</p>';
+                    echo '<p id="error-servidor" class="error-message">' . $_SESSION["error_usuario"] . '</p>';
                     unset($_SESSION["error_usuario"]);
                 }
                 if (isset($_SESSION["error_contrasenia"])) {
-                    echo '<p class="error-message">' . $_POST["error_contrasenia"] . '</p>';
+                    echo '<p class="error-message">' . $_SESSION["error_contrasenia"] . '</p>';
                     unset($_SESSION["error_contrasenia"]);
                 }
             ?>
