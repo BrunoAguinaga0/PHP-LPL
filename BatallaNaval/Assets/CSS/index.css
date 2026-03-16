@@ -1,0 +1,144 @@
+:root {
+    --fondo: #0f172a;        /* 60% */
+    --card: #1e293b;         /* 30% - Un poco más claro que el fondo */
+    --acento: #22d3ee;       /* 10% - Cian neón */
+    --texto: #f8fafc;
+    --texto-secundario: #94a3b8;
+}
+
+body {
+    background-image: url(../IMG/Gemini_Generated_Image_42t7lj42t7lj42t7.png);
+    background-size: 105%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--texto);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrado vertical */
+}
+
+.login-card {
+    background-color: var(--card);
+    opacity: 0.9;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    width: 90vh;
+    max-width: 330px;
+    text-align: center;
+    height: 55vh;
+}
+
+h1 {
+    color: var(--acento);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h3 {
+    color: var(--texto);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--fondo);
+    border: 1px solid #334155;
+    border-radius: 6px;
+    color: white;
+    box-sizing: border-box; /* Para que el padding no rompa el ancho */
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--acento);
+    box-shadow: 0 0 5px rgba(34, 211, 238, 0.3);
+}
+
+.btn-login {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--acento);
+    color: var(--fondo); /* Texto oscuro sobre fondo claro */
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-login:hover {
+    background-color: #06b6d4;
+    transform: translateY(-2px);
+}
+
+.login-footer {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.login-footer a {
+    color: var(--acento);
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+.input-recuerdame {
+    display: flex;     
+    align-items: center;  
+    gap: 10px;             
+    margin-bottom: 1.5rem; 
+}
+
+.input-recuerdame input[type="checkbox"] {
+    width: auto;         
+    margin: 0;           
+    cursor: pointer;
+}
+
+.input-recuerdame label {
+    margin-bottom: 0;      
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+}
+.input-group-recuerdame{
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-group-recuerdame a {
+    color: var(--acento);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.input-group-recuerdame a:hover {
+    text-decoration: underline;
+}
+
+.register-card{
+    height: 68vh;
+}

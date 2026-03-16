@@ -1,0 +1,20 @@
+CREATE TABLE jugadores(
+    id_jugador INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_jugador VARCHAR(30) NOT NULL UNIQUE,
+    password_jugador VARCHAR(255),
+    INDEX(nombre_jugador)
+)ENGINE=INNODB; 
+
+CREATE TABLE partidas(
+    id_partida INT AUTO_INCREMENT PRIMARY KEY,
+    id_jugador INT NOT NULL,
+    fecha_partida DATETIME DEFAULT CURRENT_TIMESTAMP,
+    tiempo_segundos INT,
+    resultado ENUM('victoria', 'derrota', 'abandonada') NOT NULL,
+)ENGINE = INNODB;
+
+ALTER TABLE partidas
+ADD CONSTRAINT fk_jugador_en_partida
+FOREIGN KEY (id_jugador) 
+REFERENCES jugadores(id_jugador)
+ON DELETE CASCADE;
