@@ -7,7 +7,8 @@
 }
 
 body {
-    background-image: url(../IMG/Gemini_Generated_Image_42t7lj42t7lj42t7.png);
+    background-color: var(--fondo);
+    background-image: url("../IMG/Gemini_Generated_Image_42t7lj42t7lj42t7.webp");
     background-size: 105%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--texto);

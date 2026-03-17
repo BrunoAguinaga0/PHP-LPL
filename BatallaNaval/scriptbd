@@ -1,3 +1,5 @@
+Base de datos creada al inicio del proyecto.
+--------------------------------
 CREATE TABLE jugadores(
     id_jugador INT AUTO_INCREMENT PRIMARY KEY,
     nombre_jugador VARCHAR(30) NOT NULL UNIQUE,
@@ -18,3 +20,7 @@ ADD CONSTRAINT fk_jugador_en_partida
 FOREIGN KEY (id_jugador) 
 REFERENCES jugadores(id_jugador)
 ON DELETE CASCADE;
+------------------------------------
+Informandome sobre como funciona realmente el recuerdame, vi que se usan tokens asi que decidi implementarlos en la bd.
+------------------------------------
+ALTER TABLE jugadores ADD COLUMN token_recuerdame VARCHAR(255) DEFAULT NULL;

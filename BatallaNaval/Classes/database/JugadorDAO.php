@@ -19,7 +19,7 @@ class JugadorDAO{
         $this->bd->comenzar_transaccion();
         $sql = "INSERT INTO jugadores (nombre_jugador, password_jugador) VALUES (?, ?)";
         $hash = password_hash($contrasenia, PASSWORD_DEFAULT);
-        $resultado = $this->bd->bd_insertar($sql, "ss", [$nombre, $hash]);
+        $resultado = $this->bd->bd_ejecutar($sql, "ss", [$nombre, $hash]);
         if($resultado){
             $id = $this->bd->insert_id();
             $this->bd->confirmar_transaccion();
@@ -33,5 +33,18 @@ class JugadorDAO{
         $resultado = $this->bd->bd_consulta($sql, "s", [$nombre]);
         return count($resultado) > 0;
     }
+    public function obtener_jugador_token($token){
+        $sql = "SELECT id_jugador FROM jugadores WHERE token_recuerdame = ? LIMIT 1";
+        $resultado = $this->bd->bd_consulta($sql, "s", [$token]);
+        if (!empty($resultado)) {
+            return $resultado[0];
         }
+        return null;
+    }
+
+    public function guardarToken($id_jugador, $token){
+        $sql = "UPDATE jugadores SET token_recuerdame = ? WHERE id_jugador = ?";
+        return $this->bd->bd_ejecutar($sql, "si",[$token,$id_jugador]);
+    }
+}
 ?>

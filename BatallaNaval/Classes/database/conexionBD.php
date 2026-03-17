@@ -1,4 +1,5 @@
 <?php
+
 class conexionBD{
     private $host = "localhost";
     private $usuario = "root";
@@ -35,7 +36,7 @@ class conexionBD{
         }
     }
 
-    public function bd_insertar($sql,$tipos="",$parametros=[]){
+    public function bd_ejecutar($sql,$tipos="",$parametros=[]){
         $stmt = $this->conexion->prepare($sql);
         if(!empty($parametros)){
             $stmt->bind_param($tipos,...$parametros);

@@ -17,7 +17,7 @@ if (isset($_SESSION['id_usuario'])) {
 
 <body>
     <div class="login-container">
-        <form action="../Api/registroBack.php" id="register-form" method="post" class="login-card register-card">
+        <form action="../Backend/registroBack.php" id="register-form" method="post" class="login-card register-card">
             <h1>Batalla Naval</h1>
             <h3>Registrarse</h3>
             <div class="input-group">
