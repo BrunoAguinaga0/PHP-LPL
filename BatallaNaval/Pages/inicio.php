@@ -46,30 +46,35 @@
                     <button type="submit" name="cerrar-sesion">Cerrar Sesión</button>
                 </form>
             </div>
-            <div class="elemento elemento2">
-                <h1 class="titulo">BATALLA NAVAL</h1>
-            </div>
-            <div class="elemento elemento3">
-            </div>
-            <div class="elemento elemento4">
-                <h3>Bienvenido a bordo <span class="nombre_resaltado"> <?php echo $_SESSION["nombre_usuario"]; ?></span></h3>
-                <div class="info_ultima_partida">
-                    <h3>Última partida</h3>
-                    <p>Fecha: <span class="fecha_resaltada"> <?php echo $fecha ?> </span></p>
-                    <p>Resultado: <span class="resultado_resaltado"> <?php echo $resultado; ?> </span></p>
-                    <p>Duracion: <span class="duracion_resaltada"> <?php echo $minutos . ":". $segundos; ?> </span></p>
+            <form style="display: contents" action="../Backend/partida.php" method="POST">
+                <div class="elemento elemento2">
+                    <h1 class="titulo">BATALLA NAVAL</h1>
                 </div>
-                <p class="sin_partida"><span class="sin_partida_resaltada"> <?php echo $sinpartida; ?> </span></p>
-            </div>
-            <div class="elemento elemento5"></div>
-            <div class="elemento elemento6"></div>
-            <div class="elemento elemento7"></div>
-            <div class="elemento elemento8"></div>
-            <div class="elemento elemento9">
-                <form action="../Backend/partida.php" method="POST">
+                <div class="elemento elemento3">
+                </div>
+                <div class="elemento elemento4">
+                    <h3>Bienvenido a bordo <span class="nombre_resaltado">
+                            <?php echo $_SESSION["nombre_usuario"]; ?></span></h3>
+                    <div class="info_ultima_partida">
+                        <h3>Última partida</h3>
+                        <p>Fecha: <span class="fecha_resaltada"> <?php echo $fecha ?> </span></p>
+                        <p>Resultado: <span class="resultado_resaltado"> <?php echo $resultado; ?> </span></p>
+                        <p>Duracion: <span class="duracion_resaltada"> <?php echo $minutos . ":". $segundos; ?> </span>
+                        </p>
+                    </div>
+                    <p class="sin_partida"><span class="sin_partida_resaltada"> <?php echo $sinpartida; ?> </span></p>
+                </div>
+                <div class="elemento elemento5"></div>
+                <div class="elemento elemento6"></div>
+                <div class="elemento elemento7"></div>
+                <div class="elemento elemento8">
+                    <div class=".radios">
+                        <
+                </div>
+                <div class="elemento elemento9">
                     <button type="submit" name="comenzar_partida">Comenzar</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </section>
 </body>
