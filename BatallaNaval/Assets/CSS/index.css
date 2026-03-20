@@ -17,6 +17,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh; /* Centrado vertical */
+    padding: 0;
 }
 
 .login-card {
@@ -30,8 +31,6 @@ body {
     text-align: center;
     height: auto;
     min-height: auto; /* Esto garantiza que no sea más chico que antes */
-    height: auto;     /* Esto permite que crezca si el contenido lo empuja */
-    
     display: flex;    /* Agregamos esto para que el contenido fluya bien */
     flex-direction: column;
 }

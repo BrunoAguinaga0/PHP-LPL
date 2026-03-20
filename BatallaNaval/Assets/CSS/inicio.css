@@ -8,13 +8,20 @@
     --texto: #f8fafc;
     --texto-secundario: #94a3b8;
 }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     background-image: url("../IMG/imagen.webp");
+    width: 100vw;
+    height: 100vh;
 }
 
 .inicio-section {
-    width: 100%;
+    width: 100vw; /* Ocupa todo el ancho de la ventana */
     height: 100vh; /* Ocupa toda la pantalla */
 }
 
@@ -22,12 +29,11 @@ body {
     2. GRID LAYOUT (La estructura de los 9 cuadros)
    ========================================================================== */
 .container {
-    margin: 15px auto;
-    width: 97%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(15, 1fr);
+    grid-template-rows: repeat(15,minmax(min-content,1fr) );
 }
 
 .elemento {
@@ -38,6 +44,7 @@ body {
 .elemento1 {
     grid-column: 1/3;
     grid-row: 1/3;
+    padding: 0.7rem;
 }
 
 .elemento2 {
@@ -60,13 +67,14 @@ body {
     grid-row: 3/13;
     border: 2px solid var(--acento);
     border-radius: 25px;
-    margin: 10px;
-    padding: 2rem; /* Más espacio interno */
+    margin: 0.5rem;
+    padding: 1rem; /* Más espacio interno */
     display: flex;
     flex-direction: column;
     align-items: center; /* Centra los títulos */
     color: var(--texto);
     opacity: 0.95;
+    overflow: auto;
 }
 
 .elemento5 {
@@ -75,7 +83,7 @@ body {
     grid-row: 3/13;
     border: 2px solid var(--acento);
     border-radius: 5px;
-    margin: 10px;
+    margin: 0.5rem;
 }
 
 .elemento6 {
@@ -85,7 +93,7 @@ body {
     grid-row: 3/13;
     border: 2px solid var(--acento);
     border-radius: 25px;
-    margin: 10px;
+    margin: 0.5rem;
 }
 
 .elemento7 {
@@ -99,10 +107,13 @@ body {
     grid-row: 13/16;
     border: 2px solid var(--acento);
     border-radius: 25px;
-    margin: 5px;
+    margin: 0.25rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
+    display:flex;
+    gap: 1rem;
 }
 
 .elemento9 {
@@ -111,6 +122,7 @@ body {
     align-items: end;
     grid-column: 8/10;
     grid-row: 13/16;
+    padding: 0.7rem;
 }
 
 /* ==========================================================================
@@ -148,6 +160,7 @@ button[name="cerrar-sesion"]:hover {
     color: white;
     border-color: #f87171;
     transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.9);
 }
 
 /* ==========================================================================
@@ -162,7 +175,7 @@ button[name="cerrar-sesion"]:hover {
 
 .info_ultima_partida, .sin_partida_resaltada {
     width: 100%; /* Que ocupe todo el ancho del panel */
-    margin-top: 10px;
+    margin-top: 0.5rem;
 }
 
 .info_ultima_partida h3 {
@@ -173,7 +186,7 @@ button[name="cerrar-sesion"]:hover {
     margin-bottom: 1.5rem;
     text-align: center;
     border-bottom: 2px solid var(--acento);
-    padding-bottom: 10px;
+    padding-bottom: 0.5rem;
     text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
 }
 
@@ -181,11 +194,11 @@ button[name="cerrar-sesion"]:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 18px 0; /* Más separación entre filas */
+    margin: 0.8rem 0; /* Más separación entre filas */
     font-size: 1.1rem; /* Texto de etiqueta más grande */
     color: var(--texto-secundario);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 8px;
+    padding-bottom: 0.4rem;
 }
 
 .info_ultima_partida span, .sin_partida_resaltada {
@@ -213,7 +226,41 @@ button[name="comenzar_partida"]:hover {
     color: white;
     border-color: #22d3ee99;
     transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(34, 211, 238, 0.9);
 }
 
+.radios{
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.radios:last-child{
+    border-right: none;
+}
+
+
+.radios-Interno{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding-right: 0.5rem;
+}
+
+.img-tablero{
+    width: 4rem;
+    height: 4rem;
+    filter: invert(1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.radios-Interno input[type="radio"]:checked ~ .img-tablero {
+    border: 2px solid var(--acento);
+    box-shadow: 0 0 10px var(--acento);
+}
+.radios-Interno input[type="radio"]:checked ~ span {
+    color:  rgb(255, 79, 79);
+    text-shadow: 0 0 8px rgb(158, 40, 40);
+}
+input[type="radio"] {
+    display: none;
+}
 
 

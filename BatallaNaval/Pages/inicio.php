@@ -68,8 +68,34 @@
                 <div class="elemento elemento6"></div>
                 <div class="elemento elemento7"></div>
                 <div class="elemento elemento8">
-                    <div class=".radios">
-                        <
+                    <label class="radios" for="radio1">
+                        <div class="radios-Interno">
+                            <input type="radio" name="radio" id="radio1" value="true">
+                            <img src="../Assets/IMG/image-removebg-preview.png" alt="imagen" class="img-tablero">
+                            <span>10x10</span>
+                        </div>
+                    </label>
+                    <label class="radios" for="radio2">
+                        <div class="radios-Interno">
+                            <input type="radio" name="radio" id="radio2" value="true">
+                            <img src="../Assets/IMG/image-removebg-preview.png" alt="imagen" class="img-tablero">
+                            <span>10x15</span>
+                        </div>
+                    </label>
+                    <label class="radios" for="radio3">
+                        <div class="radios-Interno">
+                            <input type="radio" name="radio" id="radio3" value="true">
+                            <img src="../Assets/IMG/image-removebg-preview.png" alt="imagen" class="img-tablero">
+                            <span>15x15</span>
+                        </div>
+                    </label>
+                    <label class="radios" for="radio4">
+                        <div class="radios-Interno">
+                            <input type="radio" name="radio" id="radio4" value="true">
+                            <img src="../Assets/IMG/image-removebg-preview.png" alt="imagen" class="img-tablero">
+                            <span>20x10</span>
+                        </div>
+                    </label>
                 </div>
                 <div class="elemento elemento9">
                     <button type="submit" name="comenzar_partida">Comenzar</button>
