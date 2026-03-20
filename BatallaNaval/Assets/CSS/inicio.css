@@ -1,0 +1,213 @@
+/* ==========================================================================
+    1. VARIABLES Y GENERALES (Configuración base)
+   ========================================================================== */
+:root {
+    --fondo: #0f172a;        /* 60% */
+    --card: #1e293b;         /* 30% - Un poco más claro que el fondo */
+    --acento: #22d3ee;       /* 10% - Cian neón */
+    --texto: #f8fafc;
+    --texto-secundario: #94a3b8;
+}
+
+body {
+    background-image: url("../IMG/imagen.webp");
+}
+
+.inicio-section {
+    width: 100%;
+    height: 100vh; /* Ocupa toda la pantalla */
+}
+
+/* ==========================================================================
+    2. GRID LAYOUT (La estructura de los 9 cuadros)
+   ========================================================================== */
+.container {
+    margin: 15px auto;
+    width: 97%;
+    height: 95%;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+}
+
+.elemento {
+    opacity: 0.9;
+}
+
+/* --- Posicionamiento de cada elemento --- */
+.elemento1 {
+    grid-column: 1/3;
+    grid-row: 1/3;
+}
+
+.elemento2 {
+    grid-column: 3/8;
+    grid-row: 1/3;
+    display: flex;
+    justify-content: center;
+}
+
+.elemento3 {
+    grid-column: 8/10;
+    grid-row: 1/3;
+    display: flex;
+    justify-content: end;
+}
+
+.elemento4 {
+    background-color: var(--card);
+    grid-column: 1/3;
+    grid-row: 3/13;
+    border: 2px solid var(--acento);
+    border-radius: 25px;
+    margin: 10px;
+    padding: 2rem; /* Más espacio interno */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los títulos */
+    color: var(--texto);
+    opacity: 0.95;
+}
+
+.elemento5 {
+    background-color: var(--card);
+    grid-column: 3/8;
+    grid-row: 3/13;
+    border: 2px solid var(--acento);
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.elemento6 {
+    background-color: var(--card);
+    opacity: 0.9;
+    grid-column: 8/10;
+    grid-row: 3/13;
+    border: 2px solid var(--acento);
+    border-radius: 25px;
+    margin: 10px;
+}
+
+.elemento7 {
+    grid-column: 1/3;
+    grid-row: 13/16;
+}
+
+.elemento8 {
+    background-color: var(--card);
+    grid-column: 3/8;
+    grid-row: 13/16;
+    border: 2px solid var(--acento);
+    border-radius: 25px;
+    margin: 5px;
+}
+
+.elemento9 {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    grid-column: 8/10;
+    grid-row: 13/16;
+}
+
+/* ==========================================================================
+    3. TEXTOS Y COMPONENTES (Títulos, Spans, Botones)
+   ========================================================================== */
+.titulo {
+    color: #00fff7;
+    text-shadow: 
+        0 0 7px rgba(34, 211, 238, 0.8),
+        0 0 15px rgba(34, 211, 238, 0.4);
+}
+
+.nombre_resaltado {
+    color: var(--acento);
+    font-weight: bold;
+    /* Neón más suave para texto pequeño */
+    text-shadow: 
+        0 0 7px rgba(34, 211, 238, 0.8),
+        0 0 15px rgba(34, 211, 238, 0.4);
+}
+
+button[name="cerrar-sesion"] {
+    background-color: rgb(120, 28, 28);
+    color: var(--texto);
+    border: 1px solid red;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button[name="cerrar-sesion"]:hover {
+    background-color: #f87171; /* Rojo suave para indicar salida */
+    color: white;
+    border-color: #f87171;
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+    4. PANEL DE ESTADÍSTICAS (Interno del Elemento 4)
+   ========================================================================== */
+.elemento4 h3:first-child {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--texto);
+}
+
+.info_ultima_partida, .sin_partida_resaltada {
+    width: 100%; /* Que ocupe todo el ancho del panel */
+    margin-top: 10px;
+}
+
+.info_ultima_partida h3 {
+    font-size: 1.5rem; /* Título más grande */
+    color: var(--acento);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid var(--acento);
+    padding-bottom: 10px;
+    text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+
+.info_ultima_partida p, .sin_partida {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 18px 0; /* Más separación entre filas */
+    font-size: 1.1rem; /* Texto de etiqueta más grande */
+    color: var(--texto-secundario);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
+.info_ultima_partida span, .sin_partida_resaltada {
+    font-size: 1.3rem; /* El dato es lo más grande */
+    color: var(--acento);
+    font-weight: bold;
+    text-shadow: 0 0 8px #22d3ee99;
+    font-family: 'Courier New', Courier, monospace; /* Fuente técnica */
+}
+
+button[name="comenzar_partida"] {
+    background-color: #22d3ee99;
+    color: var(--texto);
+    border: 1px solid #0e485199;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: large;
+}
+
+button[name="comenzar_partida"]:hover {
+    background-color:#13a0b6cb; /* Rojo suave para indicar salida */
+    color: white;
+    border-color: #22d3ee99;
+    transform: scale(1.05);
+}

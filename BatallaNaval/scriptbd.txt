@@ -24,3 +24,5 @@ ON DELETE CASCADE;
 Informandome sobre como funciona realmente el recuerdame, vi que se usan tokens asi que decidi implementarlos en la bd.
 ------------------------------------
 ALTER TABLE jugadores ADD COLUMN token_recuerdame VARCHAR(255) DEFAULT NULL;
+
+

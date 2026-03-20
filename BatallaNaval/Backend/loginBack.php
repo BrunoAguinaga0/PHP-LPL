@@ -9,7 +9,7 @@ $contrasenia = $_POST['contrasenia'];
 $jugador = $jugadorDAO->autenticarJugador($usuario,$contrasenia);
 if($jugador) {
     $_SESSION["id_usuario"] = $jugador["id_jugador"];
-    $_SESSION["nombre_usuario"] = $jugador["nombre_usuario"];
+    $_SESSION["nombre_usuario"] = $jugador["nombre_jugador"];
     if (isset($_POST["remember"])){
         $token = bin2hex(random_bytes(32));
         $jugadorDAO->guardarToken($jugador["id_jugador"],$token);
