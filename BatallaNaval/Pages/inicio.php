@@ -55,7 +55,7 @@
                 <div class="elemento elemento4">
                     <h3>Bienvenido a bordo <span class="nombre_resaltado">
                             <?php echo $_SESSION["nombre_usuario"]; ?></span></h3>
-                    <div class="info_ultima_partida">
+                    <div class="info_ultima_partida" style="gap: 5rem;">
                         <h3>Última partida</h3>
                         <p>Fecha: <span class="fecha_resaltada"> <?php echo $fecha ?> </span></p>
                         <p>Resultado: <span class="resultado_resaltado"> <?php echo $resultado; ?> </span></p>
@@ -64,38 +64,45 @@
                     </div>
                     <p class="sin_partida"><span class="sin_partida_resaltada"> <?php echo $sinpartida; ?> </span></p>
                 </div>
-                <div class="elemento elemento5"></div>
+                <div class="elemento elemento5" id="elemento5">
+                    
+                </div>
                 <div class="elemento elemento6"></div>
                 <div class="elemento elemento7"></div>
                 <div class="elemento elemento8">
-                    <label class="radios" for="radio1">
-                        <div class="radios-Interno">
-                            <input type="radio" name="radio" id="radio1" value="true">
-                            <img src="../Assets/IMG/image-removebg-preview.png" alt="imagen" class="img-tablero">
-                            <span>10x10</span>
-                        </div>
-                    </label>
-                    <label class="radios" for="radio2">
-                        <div class="radios-Interno">
-                            <input type="radio" name="radio" id="radio2" value="true">
-                            <img src="../Assets/IMG/image-removebg-preview.png" alt="imagen" class="img-tablero">
-                            <span>10x15</span>
-                        </div>
-                    </label>
-                    <label class="radios" for="radio3">
-                        <div class="radios-Interno">
-                            <input type="radio" name="radio" id="radio3" value="true">
-                            <img src="../Assets/IMG/image-removebg-preview.png" alt="imagen" class="img-tablero">
-                            <span>15x15</span>
-                        </div>
-                    </label>
-                    <label class="radios" for="radio4">
-                        <div class="radios-Interno">
-                            <input type="radio" name="radio" id="radio4" value="true">
-                            <img src="../Assets/IMG/image-removebg-preview.png" alt="imagen" class="img-tablero">
-                            <span>20x10</span>
-                        </div>
-                    </label>
+                    <div class="titulo-tablero">
+                        <h3 class="h3-tablero">Seleccione el tamaño del tablero</h3>
+                    </div>
+                    <div class="radios-container">
+                        <label class="radios" for="radio1">
+                            <div class="radios-Interno radius1">
+                                <input type="radio" name="radio" id="radio1" value="1">
+                                <img src="../Assets/IMG/grilla10x10.svg" alt="imagen" class="img-tablero img-chica">
+                                <span>10x10</span>
+                            </div>
+                        </label>
+                        <label class="radios" for="radio2">
+                            <div class="radios-Interno">
+                                <input type="radio" name="radio" id="radio2" value="2">
+                                <img src="../Assets/IMG/grilla10x15.svg" alt="imagen" class="img-tablero">
+                                <span>10x15</span>
+                            </div>
+                        </label>
+                        <label class="radios" for="radio3">
+                            <div class="radios-Interno">
+                                <input type="radio" name="radio" id="radio3" value="3">
+                                <img src="../Assets/IMG/grilla15x15.svg" alt="imagen" class="img-tablero">
+                                <span>15x15</span>
+                            </div>
+                        </label>
+                        <label class="radios" for="radio4">
+                            <div class="radios-Interno">
+                                <input type="radio" name="radio" id="radio4" value="4">
+                                <img src="../Assets/IMG/grilla20x10.svg" alt="imagen" class="img-tablero">
+                                <span>20x10</span>
+                            </div>
+                        </label>
+                    </div>
                 </div>
                 <div class="elemento elemento9">
                     <button type="submit" name="comenzar_partida">Comenzar</button>
@@ -103,6 +110,6 @@
             </form>
         </div>
     </section>
+    <script src="../Assets/JavaScript/mostrarTablero.js"></script>
 </body>
-
 </html>
