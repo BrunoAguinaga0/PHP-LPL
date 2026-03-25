@@ -46,5 +46,11 @@ class JugadorDAO{
         $sql = "UPDATE jugadores SET token_recuerdame = ? WHERE id_jugador = ?";
         return $this->bd->bd_ejecutar($sql, "si",[$token,$id_jugador]);
     }
+
+    public function get_datos_recuerdame($token){
+        $sql = "SELECT nombre_jugador, id_jugador FROM jugadores WHERE token_recuerdame = ?";
+        $resultado = $this->bd->bd_consulta($sql,"s",[$token]);
+        return $resultado[0];
+        }
 }
 ?>

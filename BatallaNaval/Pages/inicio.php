@@ -1,14 +1,27 @@
 <?php
     require_once "../Classes/database/PartidaDao.php";
     require_once "../Classes/database/conexionBD.php";
+    require_once "../Classes/database/JugadorDAO.php";
     session_start();
+    $bd = new conexionBD();
+    $partidaDao = new PartidaDAO($bd);
     if(!isset($_SESSION["id_usuario"]) && !isset($_COOKIE["recuerdame"])){
         header("Location: ../index.php");
         exit();
     }
-    $bd = new conexionBD();
-    $partidaDao = new PartidaDAO($bd);
+    if(isset($_COOKIE["recuerdame"]) && !isset($_SESSION["id_usuario"])){
+        $jugador = new JugadorDAO($bd);
+        $datos = $jugador->get_datos_recuerdame($_COOKIE["recuerdame"]);
+        if($datos){
+            $_SESSION["id_usuario"] = $datos["id_jugador"];
+            $_SESSION["nombre_usuario"] = $datos["nombre_jugador"];
+        }else{
+            header("Location: ../index.php");
+            exit();
+        }
+    }
     $partida = $partidaDao->traer_ultima_partida($_SESSION["id_usuario"]);
+    $nombre_jugador = $_SESSION["nombre_usuario"];
     if ($partida) {
         $resultado = $partida["resultado"];
         $minutos = intdiv($partida["tiempo_segundos"],60);
@@ -54,7 +67,7 @@
                 </div>
                 <div class="elemento elemento4">
                     <h3>Bienvenido a bordo <span class="nombre_resaltado">
-                            <?php echo $_SESSION["nombre_usuario"]; ?></span></h3>
+                            <?php echo $nombre_jugador; ?></span></h3>
                     <div class="info_ultima_partida" style="gap: 5rem;">
                         <h3>Última partida</h3>
                         <p>Fecha: <span class="fecha_resaltada"> <?php echo $fecha ?> </span></p>
