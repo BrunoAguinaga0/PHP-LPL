@@ -80,7 +80,9 @@
                 <div class="elemento elemento5" id="elemento5">
                     
                 </div>
-                <div class="elemento elemento6"></div>
+                <div class="elemento elemento6">
+                    <h3>Tu Flota</h3>
+                </div>
                 <div class="elemento elemento7"></div>
                 <div class="elemento elemento8">
                     <div class="titulo-tablero">
@@ -89,7 +91,7 @@
                     <div class="radios-container">
                         <label class="radios" for="radio1">
                             <div class="radios-Interno radius1">
-                                <input type="radio" name="radio" id="radio1" value="1">
+                                <input type="radio" name="radio" id="radio1" value="1" checked>
                                 <img src="../Assets/IMG/grilla10x10.svg" alt="imagen" class="img-tablero img-chica">
                                 <span>10x10</span>
                             </div>

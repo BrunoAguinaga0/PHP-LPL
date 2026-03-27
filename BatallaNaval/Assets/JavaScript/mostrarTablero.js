@@ -75,3 +75,6 @@ function crearTablero(filas,columnas, tamanio){
     }
     container.appendChild(grilla);
 }
+window.addEventListener('DOMContentLoaded', () => {
+        crearTablero(11, 11, 1); 
+});
