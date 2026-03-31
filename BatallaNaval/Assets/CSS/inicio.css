@@ -97,6 +97,10 @@ body {
     border: 2px solid var(--acento);
     border-radius: 25px;
     margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .elemento7 {
@@ -310,3 +314,66 @@ input[type="radio"] {
     font-weight: bold;
 }
 
+.portaviones{
+    background-color: rgb(162, 173, 175);;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.96);
+}
+
+.destructores{
+    background-color: rgba(8, 171, 41, 0.425);
+    box-shadow: 0 0 10px rgba(8, 171, 41, 0.5); 
+}   
+
+.acorazados{
+    background-color: rgba(180, 35, 35, 0.655);
+    box-shadow: 0 0 10px rgb(234, 13, 13); 
+}
+
+.submarino{
+    background-color: rgba(255, 217, 0, 0.589);
+    box-shadow: 0 0 10px rgba(240, 253, 1, 0.801); 
+}
+
+
+.titulo_flota{
+    font-size: 1.7rem;
+    text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+    border-bottom: 1px solid var(--acento);
+}
+
+.flota{
+    display: flex;
+    flex-direction: column;      
+    gap: 1rem;
+}
+
+.contador-flota{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton-sumres{
+    background: var(--fondo);
+    color: var(--texto);
+    border: 1px solid var(--acento);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.h3-flota{
+    text-align: center;
+    color: var(--acento);
+    font-size: 1.3rem;
+    text-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
+    margin: 0;
+}
+
+.flota-comun{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.134);
+
+}

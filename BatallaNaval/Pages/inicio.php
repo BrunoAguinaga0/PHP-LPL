@@ -81,7 +81,41 @@
                     
                 </div>
                 <div class="elemento elemento6">
-                    <h3>Tu Flota</h3>
+                    <h1 class="titulo , titulo_flota">Flota</h1>
+                    <div class="flota" id="flota">
+                        <div class="flota-portaviones flota-comun">
+                            <h3 class="h3-flota" style="color: white; text-shadow: 0 0 20px white;">portaviones</h3>
+                            <div class="contador-flota">
+                                <button class="boton-sumres" value="11">-</button>
+                                <h1 id="cant-portaviones">1</h1>
+                                <button class="boton-sumres" value="12">+</button>
+                            </div>
+                        </div>
+                        <div class="flota-acorazados flota-comun">
+                            <h3 class="h3-flota" style="color: red; text-shadow: 0 0 20px red; ">acorazados</h3>
+                            <div class="contador-flota">
+                                <button class="boton-sumres" value="21">-</button>
+                                <h1 id="contador-acorazados">2</h1>
+                                <button class="boton-sumres" value="22">+</button>
+                            </div>
+                        </div>
+                        <div class="flota-destructores flota-comun">
+                            <h3 class="h3-flota" style="color: green; text-shadow: 0 0 20px green; ">destructores</h3>
+                            <div class="contador-flota">
+                                <button class="boton-sumres" value="31">-</button>
+                                <h1 id="contador-destructores">3</h1>
+                                <button class="boton-sumres" value="32">+</button>
+                            </div>
+                        </div>
+                        <div class="flota-submarinos flota-comun">
+                            <h3 class="h3-flota" style="color: yellow; text-shadow: 0 0 20px yellow;">submarinos</h3>
+                            <div class="contador-flota">
+                                <button class="boton-sumres" value="41">-</button>
+                                <h1 id="contador-submarinos">4</h1>
+                                <button class="boton-sumres" value="42">+</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="elemento elemento7"></div>
                 <div class="elemento elemento8">
@@ -125,6 +159,6 @@
             </form>
         </div>
     </section>
-    <script src="../Assets/JavaScript/mostrarTablero.js"></script>
+    <script type="module" src="../Assets/JavaScript/InicioJS/juego.js"></script>
 </body>
 </html>
