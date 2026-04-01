@@ -1,4 +1,4 @@
-import {inventario} from "./flota.js";
+import {inventario, sumresFlota} from "./flota.js";
 import{crearTablero, pintarFlota} from "./mostrarTablero.js";
 crearTablero(11,11,1);
 inicializarFlota();
@@ -20,18 +20,12 @@ radioTamanio.forEach(radio => {
 })
 
 const sumres = document.querySelectorAll(".boton-sumres");
-sumres.addEventListener("click",function(){
-    valor = this.value;
-    switch(valor){
-        case "11": 
-            let portavion = document.querySelectorAll("contador-portaviones");
-            if (portavion.textContent > 0);
-                portavion.textContent = portavion.textContent + 1;
-            break;
-    }
-    
-})
-
+sumres.forEach(boton => {
+    boton.addEventListener("click",function(){
+        let valor = parseInt(this.value);
+        sumresFlota(valor);
+    })
+});
 
 
 function inicializarFlota(){
