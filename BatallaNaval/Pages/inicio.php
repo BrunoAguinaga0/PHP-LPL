@@ -153,7 +153,7 @@
                 <div class="elemento elemento9">
                     <form style="display: contents" action="../Backend/partida.php" method="POST">
                     <button type="submit" name="comenzar_partida">Comenzar</button>
-                    </form>
+                </form>
                 </div>
         </div>
     </section>

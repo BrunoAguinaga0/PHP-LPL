@@ -329,7 +329,7 @@ input[type="radio"] {
     box-shadow: 0 0 10px rgb(234, 13, 13); 
 }
 
-.submarino{
+.submarinos{
     background-color: rgba(255, 217, 0, 0.589);
     box-shadow: 0 0 10px rgba(240, 253, 1, 0.801); 
 }
@@ -376,4 +376,18 @@ input[type="radio"] {
 .flota-comun{
     border-bottom: 1px solid rgba(255, 255, 255, 0.134);
 
+}
+
+#barco-fantasma {
+    position: fixed; /* Para que flote sobre todo */
+    pointer-events: none; /* Crucial: para que el click pase "a través" y toque el tablero */
+    display: none; /* Empieza oculto */
+    opacity: 0.7; /* Un poco transparente para que se vea pro */
+    z-index: 10;
+    transition: transform 0.05s linear; /* Suaviza un poquito el movimiento */
+}
+
+.fantasma-celda {
+    width: 60px;
+    height: 50px;
 }

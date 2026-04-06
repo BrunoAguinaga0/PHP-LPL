@@ -70,14 +70,35 @@ export function crearTablero(filas,columnas, tamanio){
     container.appendChild(grilla);
 }
 
-export function pintarFlota(fila,columna, tipoFlota, orientacion){
-    const celda = document.querySelector(`[data-fila="${fila}"][data-columna="${columna}"]`);
-    if (celda){
-        celda.classList.add("barco-colocado");
-        celda.classList.add(tipoFlota);
-        celda.dataset.orientacion = orientacion;
+export function pintarFlota(fila,columna, tipoFlota, orientacion, largo){
+    for(let i = 0; i < largo; i++){
+        let celda;
+        if(orientacion == "horizontal"){
+            celda = document.querySelector(`[data-fila="${fila}"][data-columna="${columna + i}"]`);
+        }
+        else{
+            celda = document.querySelector(`[data-fila="${fila + i}"][data-columna="${columna}"]`);
+        }
+        if (celda){
+            celda.classList.add("barco-colocado");
+            celda.classList.add(tipoFlota);
+        }
     }
+}
 
+export function despintarFlota(tipoFlota, fila, columna, orientacion, largo){
+    for (let i = 0; i < largo; i++){
+        let celda;
+        if(orientacion == "horizontal"){
+            celda = document.querySelector(`[data-fila="${fila}"][data-columna="${columna + i}"]`);
+        }
+        else{
+            celda = document.querySelector(`[data-fila="${fila + i}"][data-columna="${columna}"]`);
+        }
+        if(celda){
+            celda.classList.remove("barco-colocado", tipoFlota); 
+        }
+    }
 }
 
 

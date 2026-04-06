@@ -1,56 +1,253 @@
-import {inventario, sumresFlota} from "./flota.js";
-import{crearTablero, pintarFlota} from "./mostrarTablero.js";
+import {sumresFlota, registrarFlota, borrarUltimaFlota, resertContadorFlota, historialFlota} from "./flota.js";
+import{crearTablero, despintarFlota, pintarFlota} from "./mostrarTablero.js";
+let barcoEnMano = null;
+let orientaciones = ["horizontal", "vertical"];
 crearTablero(11,11,1);
+let Tablero = crearMatriz(11, 11);
 inicializarFlota();
+
+// Crear el div que seguirá al mouse
+const fantasma = document.createElement("div");
+fantasma.id = "barco-fantasma";
+document.body.appendChild(fantasma);
+
+// Evento para seguir al mouse
+document.addEventListener("mousemove", (e) => {
+    if (barcoEnMano) {
+        fantasma.style.display = "flex";
+        // Si es vertical, los ponemos uno abajo del otro
+        fantasma.style.flexDirection = barcoEnMano.orientacion === "horizontal" ? "row" : "column";
+        
+        // Posicionamos el div en las coordenadas del mouse
+        fantasma.style.left = `${e.clientX + 10}px`;
+        fantasma.style.top = `${e.clientY + 10}px`;
+    }
+});
+
+// Cambiar el tamaño del tablero.
 const radioTamanio = document.querySelectorAll("input[name='radio']");
 radioTamanio.forEach(radio => {
     radio.addEventListener("change",function(){
         let tamanio = this.value;
         let filas, columnas;
         switch(tamanio){
-            case "1": filas = 10; columnas = 10; break;
-            case "2": filas = 10; columnas = 15; break;
-            case "3": filas = 15; columnas = 15; break;
-            case "4": filas = 20; columnas = 10; break;
-            default: filas = 10; columnas = 10; break;
+            case "1": filas = 11; columnas = 11; break;
+            case "2": filas = 11; columnas = 16; break;
+            case "3": filas = 16; columnas = 16; break;
+            case "4": filas = 21; columnas = 11; break;
+            default: filas = 11; columnas = 11; break;
         }
-        crearTablero(filas+1, columnas+1,tamanio)
+        crearTablero(filas, columnas,tamanio)
+        Tablero = crearMatriz(filas, columnas);
+        resertContadorFlota();
         inicializarFlota();
     })
 })
 
+// Sumar-Restar una flota
 const sumres = document.querySelectorAll(".boton-sumres");
 sumres.forEach(boton => {
     boton.addEventListener("click",function(){
+        let indice = Math.floor(Math.random() * 2)
+        let orientacion = orientaciones[indice];
         let valor = parseInt(this.value);
-        sumresFlota(valor);
+        let resultado;
+        resultado = sumresFlota(valor);
+        if (resultado.exito && resultado){
+            if (resultado.accion == "sumar"){
+                let posicion = buscarEspacioDisponible(Tablero, resultado.largo, orientacion);
+                if(posicion){
+                    pintarFlota(posicion.fila, posicion.columna, resultado.tipo,orientacion, resultado.largo);
+                    registrarFlota(resultado.tipo, posicion.fila, posicion.columna, resultado.largo, orientacion, Tablero);
+                }else{
+                    sumresFlota(valor - 1);
+                }
+            }
+            else{
+                let borrado = borrarUltimaFlota(resultado.tipo, Tablero);
+                if(borrado){
+                    despintarFlota(resultado.tipo, borrado.fila, borrado.columna, borrado.orientacion, borrado.largo)
+                }
+            }
+        }
     })
 });
 
+// Clickear flota
+const contenedorTablero = document.querySelector(".elemento5");
+contenedorTablero.addEventListener("click", function(evento) {
+    const celdaClickeada = evento.target.closest("div[data-fila]");
+    if (!celdaClickeada) return; // Si se clickeo un borde o algo vacio no hacemos nada
+    let filaClick = parseInt(celdaClickeada.dataset.fila);
+    let columnaClick = parseInt(celdaClickeada.dataset.columna);
+    if (barcoEnMano === null) {
+        intentarAgarrarBarco(filaClick, columnaClick);
+    } else {
+        intentarSoltarBarco(filaClick, columnaClick);
+    }
+});
 
-function inicializarFlota(){
-    for(let i=1; i<=4; i++ ){
-        pintarFlota(2,i,"portaviones");
-    }
-    for(let i=1; i<=3; i++ ){
-        pintarFlota(i+1,7,"acorazados");
-    }
-    for(let i=1; i<=3; i++ ){
-        pintarFlota(9,i+1,"acorazados");
-    }
-    for(let i=1; i<=2; i++ ){
-        pintarFlota(7,i+1,"destructores");
-    }
-    for(let i=1; i<=2; i++ ){
-        pintarFlota(i+3,9,"destructores");
-    }
-    for(let i=1; i<=2; i++ ){
-        pintarFlota(4,i+3,"destructores");
-    }
-    pintarFlota(4,2,"submarino");
-    pintarFlota(7,9,"submarino");
-    pintarFlota(8,6,"submarino");
-    pintarFlota(9,9,"submarino");
 
+function crearMatriz(filas, columnas) {
+    let matriz = Array.from({ length: filas }, () => Array(columnas).fill(0));
+    for(let i = 0; i < columnas; i++) {
+        matriz[0][i] = -1;
+    }
+    for(let i = 0; i < filas; i++){
+        matriz[i][0] = -1;
+    }
+    return matriz;
 }
 
+function buscarEspacioDisponible(matriz, largo, orientacion) {
+    // 1. Creamos una lista para guardar todas las posiciones donde el barco entra
+    let opcionesValidas = [];
+
+    for (let f = 0; f < matriz.length; f++) {
+        for (let c = 0; c < matriz[f].length; c++) {
+            let lugar = false;
+            
+            if (matriz[f][c] == 0) {
+                lugar = true;
+                
+                if (orientacion == "horizontal") {
+                    if ((c + largo) <= matriz[f].length) {
+                        for (let i = 1; i < largo; i++) {
+                            if (matriz[f][c + i] !== 0) {
+                                lugar = false;
+                                break; 
+                            }
+                        }
+                        if (lugar) {
+                            opcionesValidas.push({ fila: f, columna: c });
+                        }
+                    }
+                } else {
+                    if ((f + largo) <= matriz.length) {
+                        for (let i = 1; i < largo; i++) {
+                            if (matriz[f + i][c] !== 0) {
+                                lugar = false;
+                                break; 
+                            }
+                        }
+                        if (lugar) {
+                            opcionesValidas.push({ fila: f, columna: c });
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (opcionesValidas.length > 0) {
+        let indiceAleatorio = Math.floor(Math.random() * opcionesValidas.length);
+        return opcionesValidas[indiceAleatorio];
+    }
+    return null; 
+}
+
+function inicializarFlota() {
+    const barcosAponer = [
+        { tipo: "portaviones", largo: 4, cantidad: 1 },
+        { tipo: "acorazados",  largo: 3, cantidad: 2 },
+        { tipo: "destructores", largo: 2, cantidad: 3 },
+        { tipo: "submarinos",  largo: 1, cantidad: 4 }
+    ];
+    barcosAponer.forEach(barco => {
+        for (let i = 0; i < barco.cantidad; i++) {
+            let indice = Math.floor(Math.random() * 2);
+            let orientacion = orientaciones[indice];
+            let posicion = buscarEspacioDisponible(Tablero, barco.largo, orientacion);
+            if (!posicion) {
+                orientacion = (orientacion === "horizontal") ? "vertical" : "horizontal";
+                posicion = buscarEspacioDisponible(Tablero, barco.largo, orientacion);
+            }
+            if (posicion) {
+                registrarFlota(barco.tipo, posicion.fila, posicion.columna, barco.largo, orientacion, Tablero);
+                pintarFlota(posicion.fila, posicion.columna, barco.tipo, orientacion, barco.largo);
+        }    
+    }
+    });
+}
+
+function intentarAgarrarBarco(fClick, cClick) {
+    if (Tablero[fClick][cClick] !== 1) return;
+    for (let tipo in historialFlota) {
+        let listaBarcos = historialFlota[tipo];
+        
+        for (let i = 0; i < listaBarcos.length; i++) {
+            let barco = listaBarcos[i];
+            let pertenece = false;
+            if (barco.orientacion === "horizontal" && fClick === barco.fila && cClick >= barco.columna && cClick < barco.columna + barco.largo) {
+                pertenece = true;
+            } else if (barco.orientacion === "vertical" && cClick === barco.columna && fClick >= barco.fila && fClick < barco.fila + barco.largo) {
+                pertenece = true;
+            }
+            if (pertenece) {
+                barcoEnMano = {
+                    tipo: tipo,
+                    fila: barco.fila,
+                    columna: barco.columna,
+                    largo: barco.largo,
+                    orientacion: barco.orientacion
+                };
+                listaBarcos.splice(i, 1);
+                for (let j = 0; j < barco.largo; j++) {
+                    if (barco.orientacion === "horizontal") Tablero[barco.fila][barco.columna + j] = 0;
+                    else Tablero[barco.fila + j][barco.columna] = 0;
+                }
+                despintarFlota(tipo, barco.fila, barco.columna, barco.orientacion, barco.largo);
+                fantasma.innerHTML = "";
+                fantasma.style.display = "flex";
+                fantasma.style.flexDirection = barcoEnMano.orientacion === "horizontal" ? "row" : "column";
+                for (let k = 0; k < barcoEnMano.largo; k++) {
+                    const bloque = document.createElement("div");
+                    bloque.classList.add("fantasma-celda", barcoEnMano.tipo);
+                    fantasma.appendChild(bloque);
+                }
+                return;
+            }
+        }
+    }
+}
+
+function intentarSoltarBarco(fClick, cClick) {
+    let esValido = validarLugarExacto(Tablero, fClick, cClick, barcoEnMano.largo, barcoEnMano.orientacion);
+    if (esValido) {
+        pintarFlota(fClick, cClick, barcoEnMano.tipo, barcoEnMano.orientacion, barcoEnMano.largo);
+        registrarFlota(barcoEnMano.tipo, fClick, cClick, barcoEnMano.largo, barcoEnMano.orientacion, Tablero);
+        
+        barcoEnMano = null;
+        fantasma.style.display = "none";
+        document.body.style.cursor = "default";
+    } else {
+        console.log("Posición inválida");
+    }
+}
+
+
+export function validarLugarExacto(matriz, fila, columna, largo, orientacion) {
+    if (matriz[fila][columna] !== 0) {
+        return false;
+    }
+    if (orientacion === "horizontal") {
+        if (columna + largo > matriz[fila].length) {
+            return false; 
+        }
+        for (let i = 1; i < largo; i++) {
+            if (matriz[fila][columna + i] !== 0) {
+                return false; // Chocó con otro barco
+            }
+        }
+    } else { 
+        if (fila + largo > matriz.length) {
+            return false; 
+        }
+        for (let i = 1; i < largo; i++) {
+            if (matriz[fila + i][columna] !== 0) {
+                return false; // Chocó con otro barco
+            }
+        }
+    }
+    return true; 
+}
