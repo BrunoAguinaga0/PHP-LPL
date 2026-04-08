@@ -49,7 +49,7 @@ if (isset($_SESSION['id_usuario'])) {
             </div>
         </form>
     </div>
-    <script src="../Assets/JavaScript/registro.js"></script>
+    <script src="../Assets/JavaScript/IndexJS/registro.js"></script>
 </body>
 
 </html>

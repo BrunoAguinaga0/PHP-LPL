@@ -128,3 +128,12 @@ export function resertContadorFlota(){
     submarinos.textContent = 4;
 }
 
+export function resetFlota(){
+    historialFlota = {
+        "portaviones" : [],
+        "acorazados" : [],
+        "destructores" : [],
+        "submarinos" : []
+    }
+}
+

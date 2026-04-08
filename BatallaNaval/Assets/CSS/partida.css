@@ -1,0 +1,155 @@
+:root {
+    --fondo: #0f172a;           /* Color base para transparencias */
+    --card: #1e293b;            /* Color de los contenedores */
+    --acento: #22d3ee;          /* Cian neón para resaltar */
+    --texto: #f8fafc;           /* Blanco azulado */
+    --texto-secundario: #94a3b8; /* Gris azulado */
+}
+
+/* El body queda intacto con tu imagen, solo nos aseguramos que no haya scroll */
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--texto);
+    background-image: url("../IMG/fondo_batalla1.webp");
+}
+
+/* EL GRID MAESTRO */
+.layout-principal {
+    display: grid;
+    grid-template-rows: 70px 1fr 70px; 
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* HEADER: Superior */
+.seccion-superior {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(15, 23, 42, 0.6); /* --fondo con 60% opacidad */
+    border-bottom: 2px solid rgba(34, 211, 238, 0.3); /* Borde Cian */
+}
+
+.espacio-cronometro {
+    background-color: var(--card);
+    padding: 6px 20px;
+    border-radius: 4px;
+    border: 1px solid var(--acento);
+    color: var(--acento);
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+}
+
+/* CUERPO CENTRAL (Tableros) */
+.seccion-central {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zona-tableros {
+    display: flex;
+    gap: 40px;
+}
+
+/* LOS TABLEROS (Módulos con transparencia) */
+.modulo-tablero {
+    background-color: rgba(30, 41, 59, 0.7); /* --card con transparencia */
+    backdrop-filter: blur(5px); /* Efecto vidrio */
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: 650px;
+    height: 550px;
+}
+
+.header-tablero {
+    padding: 12px;
+    text-align: center;
+    background-color: rgba(15, 23, 42, 0.5);
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* El título de ataque usa tu color de acento */
+.header-tablero.ataque {
+    background-color: var(--acento);
+    color: var(--fondo);
+}
+
+.cuerpo-tablero {
+    padding: 10px;
+    width: 97%;
+    height: 88%;
+}
+
+/* FOOTER: Inferior */
+.seccion-inferior {
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    background-color: rgba(15, 23, 42, 0.7);
+    border-top: 2px solid rgba(34, 211, 238, 0.3)
+}
+
+.barra-acciones {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Botón Rendirse con tu color de acento */
+.boton-accion {
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid var(--acento);
+    color: var(--acento);
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.boton-accion:hover {
+    background-color: var(--acento);
+    color: var(--fondo);
+}
+
+.boton-config {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: var(--texto-secundario);
+    cursor: pointer;
+}
+
+.celda-previsualizacion {
+    border: 1px solid rgba(34, 211, 238, 0.15); /* Cian muy suave */
+    background-color: rgba(34, 211, 238, 0.03);
+}
+
+.portaviones{
+    background-color: rgb(162, 173, 175);;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.96);
+}
+
+.destructores{
+    background-color: rgba(8, 171, 41, 0.425);
+    box-shadow: 0 0 10px rgba(8, 171, 41, 0.5); 
+}   
+
+.acorazados{
+    background-color: rgba(180, 35, 35, 0.655);
+    box-shadow: 0 0 10px rgb(234, 13, 13); 
+}
+
+.submarinos{
+    background-color: rgba(255, 217, 0, 0.589);
+    box-shadow: 0 0 10px rgba(240, 253, 1, 0.801); 
+}

@@ -151,9 +151,15 @@
                     </div>
                 </div>
                 <div class="elemento elemento9">
-                    <form style="display: contents" action="../Backend/partida.php" method="POST">
-                    <button type="submit" name="comenzar_partida">Comenzar</button>
-                </form>
+                    <form id="form-inicio" style="display: contents" action="../Backend/partida.php" method="POST">
+                        <input type="hidden" name="matriz_jugador" id="input-matriz">
+                        <input type="hidden" name="historial_jugador" id="input-historial">
+                        <input type="hidden" name="filas_tablero" id="input-filas">
+                        <input type="hidden" name="columnas_tablero" id="input-columnas">
+                        <input type="hidden" name="tamanio-tablero" id="input-tamanio">
+                        <input type="hidden" name="cantidades_flota" id="input-cantidades">
+                        <button type="submit" name="comenzar_partida">Comenzar</button>
+                    </form>
                 </div>
         </div>
     </section>

@@ -1,12 +1,12 @@
-import {sumresFlota, registrarFlota, borrarUltimaFlota, resertContadorFlota, historialFlota} from "./flota.js";
+import {sumresFlota, registrarFlota, borrarUltimaFlota, resertContadorFlota, historialFlota, resetFlota} from "./flota.js";
 import{crearTablero, despintarFlota, pintarFlota} from "./mostrarTablero.js";
+let contenedor = document.querySelector("#elemento5");
 let barcoEnMano = null;
+let filas = 10, columnas = 10, tamanio = 1;
 let orientaciones = ["horizontal", "vertical"];
-crearTablero(11,11,1);
-let Tablero = crearMatriz(11, 11);
+crearTablero(filas,columnas,1, "elemento5");
+let Tablero = crearMatriz(filas, columnas);
 inicializarFlota();
-
-// Crear el div que seguirá al mouse
 const fantasma = document.createElement("div");
 fantasma.id = "barco-fantasma";
 document.body.appendChild(fantasma);
@@ -29,17 +29,17 @@ const radioTamanio = document.querySelectorAll("input[name='radio']");
 radioTamanio.forEach(radio => {
     radio.addEventListener("change",function(){
         let tamanio = this.value;
-        let filas, columnas;
         switch(tamanio){
-            case "1": filas = 11; columnas = 11; break;
-            case "2": filas = 11; columnas = 16; break;
-            case "3": filas = 16; columnas = 16; break;
-            case "4": filas = 21; columnas = 11; break;
-            default: filas = 11; columnas = 11; break;
+            case "1": filas = 10; columnas = 10; break;
+            case "2": filas = 10; columnas = 15; break;
+            case "3": filas = 15; columnas = 15; break;
+            case "4": filas = 20; columnas = 10; break;
+            default: filas = 10; columnas = 10; break;
         }
-        crearTablero(filas, columnas,tamanio)
+        crearTablero(filas, columnas,tamanio, "elemento5");
         Tablero = crearMatriz(filas, columnas);
         resertContadorFlota();
+        resetFlota();
         inicializarFlota();
     })
 })
@@ -55,9 +55,9 @@ sumres.forEach(boton => {
         resultado = sumresFlota(valor);
         if (resultado.exito && resultado){
             if (resultado.accion == "sumar"){
-                let posicion = buscarEspacioDisponible(Tablero, resultado.largo, orientacion);
+                let posicion = buscarEspacioDisponible(Tablero, resultado.largo, orientacion, contenedor);
                 if(posicion){
-                    pintarFlota(posicion.fila, posicion.columna, resultado.tipo,orientacion, resultado.largo);
+                    pintarFlota(posicion.fila, posicion.columna, resultado.tipo,orientacion, resultado.largo, contenedor);
                     registrarFlota(resultado.tipo, posicion.fila, posicion.columna, resultado.largo, orientacion, Tablero);
                 }else{
                     sumresFlota(valor - 1);
@@ -87,15 +87,31 @@ contenedorTablero.addEventListener("click", function(evento) {
     }
 });
 
+// Envia los datos al backend y va hacia la pantalla de juego
+const formInicio = document.querySelector("#form-inicio");
+formInicio.addEventListener("submit", function(e) {
+    // 1. Convertimos los objetos y arrays a texto JSON
+    const matrizTexto = JSON.stringify(Tablero); 
+    const historialTexto = JSON.stringify(historialFlota);    // 2. Los metemos en los inputs ocultos
+    const cantidades = {
+        portaviones: historialFlota["portaviones"].length,
+        acorazados: historialFlota["acorazados"].length,
+        destructores: historialFlota["destructores"].length,
+        submarinos: historialFlota["submarinos"].length
+    };
+    document.querySelector("#input-matriz").value = matrizTexto;
+    document.querySelector("#input-historial").value = historialTexto;
+    document.querySelector("#input-filas").value = filas;
+    document.querySelector("#input-columnas").value = columnas;
+    document.querySelector("#input-tamanio").value = tamanio;
+    document.querySelector("#input-cantidades").value = JSON.stringify(cantidades);
+    console.log(filas);
+    console.log(columnas);
+    console.log(tamanio);
+});
 
 function crearMatriz(filas, columnas) {
     let matriz = Array.from({ length: filas }, () => Array(columnas).fill(0));
-    for(let i = 0; i < columnas; i++) {
-        matriz[0][i] = -1;
-    }
-    for(let i = 0; i < filas; i++){
-        matriz[i][0] = -1;
-    }
     return matriz;
 }
 
@@ -164,7 +180,7 @@ function inicializarFlota() {
             }
             if (posicion) {
                 registrarFlota(barco.tipo, posicion.fila, posicion.columna, barco.largo, orientacion, Tablero);
-                pintarFlota(posicion.fila, posicion.columna, barco.tipo, orientacion, barco.largo);
+                pintarFlota(posicion.fila, posicion.columna, barco.tipo, orientacion, barco.largo, contenedor);
         }    
     }
     });
@@ -214,7 +230,7 @@ function intentarAgarrarBarco(fClick, cClick) {
 function intentarSoltarBarco(fClick, cClick) {
     let esValido = validarLugarExacto(Tablero, fClick, cClick, barcoEnMano.largo, barcoEnMano.orientacion);
     if (esValido) {
-        pintarFlota(fClick, cClick, barcoEnMano.tipo, barcoEnMano.orientacion, barcoEnMano.largo);
+        pintarFlota(fClick, cClick, barcoEnMano.tipo, barcoEnMano.orientacion, barcoEnMano.largo, contenedor);
         registrarFlota(barcoEnMano.tipo, fClick, cClick, barcoEnMano.largo, barcoEnMano.orientacion, Tablero);
         
         barcoEnMano = null;
