@@ -132,6 +132,78 @@ body {
 .celda-previsualizacion {
     border: 1px solid rgba(34, 211, 238, 0.15); /* Cian muy suave */
     background-color: rgba(34, 211, 238, 0.03);
+    overflow: hidden; 
+    min-width: 0;
+    min-height: 0;
+}
+
+
+
+#contenedor-ia{
+    cursor: pointer;
+    transition: 0.9s ease;
+}
+
+
+/* 1. DISPARO AL AGUA (Fallo) */
+.agua {
+    background-color: rgba(56, 189, 248, 0.2); /* Azul translúcido */
+    box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.4); /* Profundidad */
+    border-color: rgba(56, 189, 248, 0.3);
+    cursor: not-allowed; /* Cambia el cursor para indicar que no se puede volver a tirar ahí */
+    animation: salpicadura 0.3s ease-out; /* Animación de caída */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* 2. DISPARO ACERTADO (Impacto / Tocado) */
+.tocado {
+    background-color: rgba(239, 68, 68, 0.6); /* Rojo intenso translúcido */
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.8), inset 0 0 10px rgb(101, 26, 26); /* Brillo neón rojo por dentro y fuera */
+    border-color: #ef4444; /* Borde rojo sólido */
+    cursor: not-allowed;
+    animation: explosion 0.4s ease-out forwards; /* Animación de explosión */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: clamp(8px, 1.5vw, 1.2rem); 
+    line-height: 1; /* Evita que el texto genere márgenes invisibles */
+    /* Opcional: le pone una "X" adentro para que sea aún más claro */
+
+}
+
+.agua::after {
+    content: "✕";
+    text-shadow: 0 0 5px white;
+}
+.tocado::after {
+    content: "🔥";
+    text-shadow: 0 0 5px rgb(0, 0, 0);
+}
+
+/* Efecto de explosión (se agranda un poco y brilla más) */
+@keyframes explosion {
+    0% { transform: scale(1); }
+    50% { 
+        transform: scale(1.2); 
+        background-color: rgba(239, 68, 68, 0.9);
+        box-shadow: 0 0 25px rgba(239, 68, 68, 1);
+        z-index: 10; /* Lo trae al frente durante la animación */
+    }
+    100% { transform: scale(1); }
+}
+
+/* Efecto de salpicadura (se hunde un poquito) */
+@keyframes salpicadura {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
 }
 
 .portaviones{

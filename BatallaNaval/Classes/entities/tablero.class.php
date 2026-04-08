@@ -134,5 +134,25 @@ public function inicializarAleatorio($cantidades) {
         }
         return false; // No hay más barcos (Game Over)
     }
+    /* Devuelve un array solo con las coordenadas que fueron atacadas (2 y 3). */
+        public function obtenerDisparos() {
+            $disparos = [];
+            for ($f = 0; $f < $this->filas; $f++) {
+                for ($c = 0; $c < $this->columnas; $c++) {
+                    
+                    if ($this->matriz[$f][$c] == 2) {
+                        $disparos[] = ['f' => $f, 'c' => $c, 'tipo' => 'tocado'];
+                    } 
+                    elseif ($this->matriz[$f][$c] == 3) {
+                        $disparos[] = ['f' => $f, 'c' => $c, 'tipo' => 'agua'];
+                    }
+                    
+                }
+            }
+            
+            return $disparos;
+        }
 }
+
+
 ?>

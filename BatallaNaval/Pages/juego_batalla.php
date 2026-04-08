@@ -23,7 +23,7 @@ if (!isset($_SESSION['config_partida'])) {
 <div class="layout-principal">
     <header class="seccion-superior">
         <div class="espacio-cronometro">
-            <span class="reloj" id="timer">10:00</span>
+            <span class="reloj" id="timer">00:00</span>
         </div>
     </header>
     <main class="seccion-central">
@@ -33,7 +33,7 @@ if (!isset($_SESSION['config_partida'])) {
                 <div class="cuerpo-tablero" id="contenedor-jugador"></div>
             </div>
             <div class="modulo-tablero">
-                <div class="header-tablero ">Flota Enemiga</div>
+                <div class="header-tablero ataque" id="header-ia">¡Tu Turno!</div>
                 <div class="cuerpo-tablero" id="contenedor-ia"></div>
             </div>
         </div>
@@ -41,7 +41,6 @@ if (!isset($_SESSION['config_partida'])) {
     <footer class="seccion-inferior">
         <div class="barra-acciones">
             <button class="boton-accion" onclick="location.href='../Backend/logout.php'">Rendirse</button>
-            <button class="boton-config">⚙️</button>
         </div>
     </footer>
 
@@ -53,7 +52,9 @@ if (!isset($_SESSION['config_partida'])) {
         tamanio: <?php echo $_SESSION['config_partida']['tamanio']; ?>,
         historialFlota: <?php echo json_encode($_SESSION['config_partida']['historial_jugador']); ?>
     };
+    console.log("🤫 MATRIZ ENEMIGA:", <?php echo json_encode($_SESSION['tablero_ia']->getMatriz()); ?>);
 </script>
 <script type="module" src="../Assets/JavaScript/JuegoJS/batalla.js"></script>
+
 </body>
 </html>

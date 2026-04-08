@@ -55,3 +55,4 @@ export function despintarFlota(tipoFlota, fila, columna, orientacion, largo){
 }
 
 
+
