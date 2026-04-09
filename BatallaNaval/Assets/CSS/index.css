@@ -16,7 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Centrado vertical */
+    height: 100vh; 
     padding: 0;
 }
 
@@ -30,8 +30,8 @@ body {
     max-width: 330px;
     text-align: center;
     height: auto;
-    min-height: auto; /* Esto garantiza que no sea más chico que antes */
-    display: flex;    /* Agregamos esto para que el contenido fluya bien */
+    min-height: auto; 
+    display: flex; 
     flex-direction: column;
 }
 
@@ -69,7 +69,7 @@ input {
     border: 1px solid #334155;
     border-radius: 6px;
     color: white;
-    box-sizing: border-box; /* Para que el padding no rompa el ancho */
+    box-sizing: border-box; 
 }
 
 input:focus {

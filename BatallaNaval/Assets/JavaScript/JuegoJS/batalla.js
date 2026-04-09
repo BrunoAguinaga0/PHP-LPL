@@ -1,16 +1,44 @@
-let segundosTranscurridos = 0;
-let intervaloCronometro;
-const elementoCronometro = document.getElementById('timer');
-intervaloCronometro = setInterval(actualizarCronometro, 1000);
-
-
-import { crearTablero, pintarFlota } from "../InicioJS/mostrarTablero.js";
 const config = window.CONFIG_BATALLA;
+const elementoCronometro = document.getElementById('timer');
+let segundosTranscurridos = config.segundosJugados || 0;
+actualizarCronometro();
+let intervaloCronometro;
+intervaloCronometro = setInterval(actualizarCronometro, 1000);
+import { crearTablero, pintarFlota } from "../InicioJS/mostrarTablero.js";
 crearTablero(config.filas, config.columnas, config.tamanio, 'contenedor-jugador');
 crearTablero(config.filas, config.columnas, config.tamanio, 'contenedor-ia');
 const contenedorIA = document.getElementById('contenedor-ia');
 const contenedorJugador = document.getElementById('contenedor-jugador');
 const tituloIA = document.getElementById('header-ia');
+const rendirse = document.getElementById('rendirse');
+const modalRendirse = document.getElementById('modal-rendirse');
+const btnConfirmar = document.getElementById('btn-confirmar-rendicion');
+const btnCancelar = document.getElementById('btn-cancelar-rendicion');
+let turno = true;
+
+
+//Si el usuario recarga la pagina no se pierda lo que hizo
+config.disparosAlEnemigo.forEach(disparo => {
+    const celdaEnemiga = contenedorIA.querySelector(`.celda-previsualizacion[data-fila='${disparo.f}'][data-columna='${disparo.c}']`);
+    if (celdaEnemiga) {
+        celdaEnemiga.classList.add(disparo.tipo);
+    }
+});
+
+config.disparosDeIA.forEach(disparo => {
+    const miCelda = contenedorJugador.querySelector(`.celda-previsualizacion[data-fila='${disparo.f}'][data-columna='${disparo.c}']`);
+    if (miCelda) {
+        miCelda.classList.add(disparo.tipo);
+    }
+});
+
+if (config.estado === 'victoria' || config.estado === 'derrota' || config.estado === 'abandonada') {
+    turno = false;
+    contenedorIA.style.opacity = "0.7";
+    clearInterval(intervaloCronometro); 
+    alert("Esta partida ya ha concluido. ¡Ve al menú para iniciar otra!");
+}
+
 Object.entries(config.historialFlota).forEach(([tipoBarco, barcosGuardados]) => {
     barcosGuardados.forEach(barco => {
         pintarFlota(
@@ -24,7 +52,33 @@ Object.entries(config.historialFlota).forEach(([tipoBarco, barcosGuardados]) => 
     });
 });
 
-let turno = true;
+
+
+rendirse.addEventListener('click', () => {
+        modalRendirse.style.display = 'flex'; 
+    });
+btnCancelar.addEventListener('click', () => {
+        modalRendirse.style.display = 'none';
+    });
+if (btnConfirmar) {
+    btnConfirmar.addEventListener('click', () => {
+        modalRendirse.style.display = 'none';
+        fetch('../Backend/rendirse.php', { method: 'POST' })
+        .then(respuesta => respuesta.json())
+        .then(data => {
+            if (data.estado === "abandonada") {
+                
+                clearInterval(intervaloCronometro);
+                turno = false;
+            }
+        })
+        .catch(error => {
+            console.error("Error al intentar rendirse:", error);
+            alert("Hubo un problema de conexión.");
+        });
+    });
+}
+
 
 contenedorIA.addEventListener('click', (e) => {
     if(!turno) return;

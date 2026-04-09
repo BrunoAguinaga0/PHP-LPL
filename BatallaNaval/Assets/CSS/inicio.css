@@ -145,9 +145,6 @@ body {
     padding: 0.7rem;
 }
 
-/* ==========================================================================
-    3. TEXTOS Y COMPONENTES (Títulos, Spans, Botones)
-   ========================================================================== */
 .titulo {
     color: #00fff7;
     text-shadow: 
@@ -183,9 +180,7 @@ button[name="cerrar-sesion"]:hover {
     box-shadow: 0 0 25px rgba(255, 0, 0, 0.9);
 }
 
-/* ==========================================================================
-    4. PANEL DE ESTADÍSTICAS (Interno del Elemento 4)
-   ========================================================================== */
+
 .elemento4 h3:first-child {
     font-size: 1.2rem;
     margin-bottom: 2rem;
@@ -194,12 +189,12 @@ button[name="cerrar-sesion"]:hover {
 }
 
 .info_ultima_partida, .sin_partida_resaltada {
-    width: 100%; /* Que ocupe todo el ancho del panel */
+    width: 100%; 
     margin-top: 0.5rem;
 }
 
 .info_ultima_partida h3 {
-    font-size: 1.5rem; /* Título más grande */
+    font-size: 1.5rem; 
     color: var(--acento);
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -214,8 +209,8 @@ button[name="cerrar-sesion"]:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0.8rem 0; /* Más separación entre filas */
-    font-size: 1.1rem; /* Texto de etiqueta más grande */
+    margin: 0.8rem 0; 
+    font-size: 1.1rem; 
     color: var(--texto-secundario);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 1.5rem;
@@ -223,11 +218,11 @@ button[name="cerrar-sesion"]:hover {
 }
 
 .info_ultima_partida span, .sin_partida_resaltada {
-    font-size: 1.3rem; /* El dato es lo más grande */
+    font-size: 1.3rem; 
     color: var(--acento);
     font-weight: bold;
     text-shadow: 0 0 8px #22d3ee99;
-    font-family: 'Courier New', Courier, monospace; /* Fuente técnica */
+    font-family: 'Courier New', Courier, monospace; 
 }
 
 button[name="comenzar_partida"] {
@@ -243,7 +238,7 @@ button[name="comenzar_partida"] {
 }
 
 button[name="comenzar_partida"]:hover {
-    background-color:#13a0b6cb; /* Rojo suave para indicar salida */
+    background-color:#13a0b6cb; 
     color: white;
     border-color: #22d3ee99;
     transform: scale(1.05);
@@ -293,7 +288,7 @@ input[type="radio"] {
 }
 
 .celda-previsualizacion {
-    border: 1px solid rgba(34, 211, 238, 0.15); /* Cian muy suave */
+    border: 1px solid rgba(34, 211, 238, 0.15);
     background-color: rgba(34, 211, 238, 0.03);
 }
 

@@ -1,7 +1,7 @@
 <?php 
-session_start();
 require_once '../Classes/database/conexionBD.php';
 require_once '../Classes/database/jugadorDAO.php';
+session_start();
 $bd = new conexionBD();
 $jugadorDAO = new JugadorDAO($bd);
 $nombre = $_POST['usuario'];

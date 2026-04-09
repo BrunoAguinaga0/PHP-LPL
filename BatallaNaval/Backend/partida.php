@@ -16,11 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['tablero_ia'] = $objTableroIA;
     $_SESSION['config_partida'] = [
         "tamanio" => $tamanio,
-        'filas' => $filas,
-        'columnas' => $columnas,
-        'cantidades' => $cantidadesFlota,
-        'historial_jugador' => $historialFlota,
-        'estado' => 'jugando'
+        "filas" => $filas,
+        "columnas" => $columnas,
+        "cantidades" => $cantidadesFlota,
+        "historial_jugador" => $historialFlota,
+        "estado" => 'jugando'
     ];
     header("Location: ../Pages/juego_batalla.php");
     exit();

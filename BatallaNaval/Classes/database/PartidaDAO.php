@@ -13,5 +13,22 @@ class PartidaDAO{
         }
         return NULL;
     }
+
+    public function guardarPartida($id_jugador, $fecha_partida, $tiempo_segundos, $resultado){
+        $this->bd->comenzar_transaccion();
+        $sql = "INSERT into partidas (id_jugador,fecha_partida,tiempo_segundos,resultado) VALUES (?,?,?,?)";
+        $partida = $this->bd->bd_ejecutar($sql,"isis",[$id_jugador,$fecha_partida,$tiempo_segundos,$resultado]);
+        if($partida){
+            $this->bd->confirmar_transaccion();
+            return true;
+        }
+        $this->bd->cancelar_transaccion();
+        return false;
+        }
+    
+    public function rankingTop5(){
+        $sql = "SELECT * FROM partidas WHERE resultado = 'victoria' ORDER BY tiempo_segundos ASC LIMIT 5";
+        return $this->bd->bd_consulta($sql);
+    }
 }
 ?>

@@ -20,6 +20,10 @@
             exit();
         }
     }
+    if (isset($_SESSION['config_partida'])) {
+        header("Location: juego_batalla.php");
+        exit();
+}
     $partida = $partidaDao->traer_ultima_partida($_SESSION["id_usuario"]);
     $nombre_jugador = $_SESSION["nombre_usuario"];
     if ($partida) {

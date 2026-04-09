@@ -6,7 +6,6 @@
     --texto-secundario: #94a3b8; /* Gris azulado */
 }
 
-/* El body queda intacto con tu imagen, solo nos aseguramos que no haya scroll */
 body {
     height: 100vh;
     width: 100vw;
@@ -16,22 +15,21 @@ body {
     background-image: url("../IMG/fondo_batalla1.webp");
 }
 
-/* EL GRID MAESTRO */
+
 .layout-principal {
     display: grid;
     grid-template-rows: 70px 1fr 70px; 
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
 }
 
-/* HEADER: Superior */
+
 .seccion-superior {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(15, 23, 42, 0.6); /* --fondo con 60% opacidad */
-    border-bottom: 2px solid rgba(34, 211, 238, 0.3); /* Borde Cian */
+    background-color: rgba(15, 23, 42, 0.6); 
+    border-bottom: 2px solid rgba(34, 211, 238, 0.3); 
 }
 
 .espacio-cronometro {
@@ -44,7 +42,6 @@ body {
     box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
 }
 
-/* CUERPO CENTRAL (Tableros) */
 .seccion-central {
     display: flex;
     justify-content: center;
@@ -56,13 +53,11 @@ body {
     gap: 40px;
 }
 
-/* LOS TABLEROS (Módulos con transparencia) */
 .modulo-tablero {
-    background-color: rgba(30, 41, 59, 0.7); /* --card con transparencia */
-    backdrop-filter: blur(5px); /* Efecto vidrio */
+    background-color: rgba(30, 41, 59, 0.7); 
+    backdrop-filter: blur(5px);
     border: 1px solid rgba(148, 163, 184, 0.2);
     border-radius: 12px;
-    overflow: hidden;
     min-width: 650px;
     height: 550px;
 }
@@ -77,7 +72,7 @@ body {
     text-transform: uppercase;
 }
 
-/* El título de ataque usa tu color de acento */
+
 .header-tablero.ataque {
     background-color: var(--acento);
     color: var(--fondo);
@@ -89,7 +84,6 @@ body {
     height: 88%;
 }
 
-/* FOOTER: Inferior */
 .seccion-inferior {
     display: flex;
     align-items: center;
@@ -104,7 +98,6 @@ body {
     width: 100%;
 }
 
-/* Botón Rendirse con tu color de acento */
 .boton-accion {
     padding: 8px 20px;
     background: transparent;
@@ -137,21 +130,18 @@ body {
     min-height: 0;
 }
 
-
-
 #contenedor-ia{
     cursor: pointer;
     transition: 0.9s ease;
 }
 
-
 /* 1. DISPARO AL AGUA (Fallo) */
 .agua {
-    background-color: rgba(56, 189, 248, 0.2); /* Azul translúcido */
+    background-color: rgba(56, 189, 248, 0.2); 
     box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.4); /* Profundidad */
     border-color: rgba(56, 189, 248, 0.3);
     cursor: not-allowed; /* Cambia el cursor para indicar que no se puede volver a tirar ahí */
-    animation: salpicadura 0.3s ease-out; /* Animación de caída */
+    animation: salpicadura 0.3s ease-out; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,9 +152,9 @@ body {
 
 /* 2. DISPARO ACERTADO (Impacto / Tocado) */
 .tocado {
-    background-color: rgba(239, 68, 68, 0.6); /* Rojo intenso translúcido */
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.8), inset 0 0 10px rgb(101, 26, 26); /* Brillo neón rojo por dentro y fuera */
-    border-color: #ef4444; /* Borde rojo sólido */
+    background-color: rgba(239, 68, 68, 0.6);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.8), inset 0 0 10px rgb(101, 26, 26); 
+    border-color: #ef4444;
     cursor: not-allowed;
     animation: explosion 0.4s ease-out forwards; /* Animación de explosión */
     display: flex;
@@ -174,7 +164,6 @@ body {
     font-weight: bold;
     font-size: clamp(8px, 1.5vw, 1.2rem); 
     line-height: 1; /* Evita que el texto genere márgenes invisibles */
-    /* Opcional: le pone una "X" adentro para que sea aún más claro */
 
 }
 
@@ -194,7 +183,7 @@ body {
         transform: scale(1.2); 
         background-color: rgba(239, 68, 68, 0.9);
         box-shadow: 0 0 25px rgba(239, 68, 68, 1);
-        z-index: 10; /* Lo trae al frente durante la animación */
+        z-index: 10;
     }
     100% { transform: scale(1); }
 }
@@ -224,4 +213,73 @@ body {
 .submarinos{
     background-color: rgba(255, 217, 0, 0.589);
     box-shadow: 0 0 10px rgba(240, 253, 1, 0.801); 
+}
+
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(1px); 
+    z-index: 1000; 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenido {
+    background-color: var(--fondo);
+    border: 2px solid var(--acento); 
+    box-shadow: 0 0 5px var(--acento); 
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    color: white;
+}
+
+.modal-contenido h3 {
+    color: #ef4444;
+    margin-top: 0;
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+}
+
+.modal-botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 15px;
+}
+
+.boton-peligro {
+    background-color: var(--acento);
+    color: var(--texto);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+}
+.boton-peligro:hover {
+    box-shadow: 0 0 5px var(--acento);
+}
+
+.boton-secundario {
+    background-color: transparent;
+    color: #94a3b8;
+    border: 1px solid #94a3b8;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+}
+.boton-secundario:hover {
+    color: white;
+    border-color: white;
+    background-color: rgba(255, 255, 255, 0.1);
 }

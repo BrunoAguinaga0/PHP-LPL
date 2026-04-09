@@ -1,0 +1,77 @@
+body{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ef4444;
+}
+
+.modal-overlay {
+    display: flex; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(1px); 
+    z-index: 1000; 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenido {
+    background-color: var(--fondo);
+    border: 2px solid var(--acento); 
+    box-shadow: 0 0 5px var(--acento); 
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    color: white;
+}
+
+.modal-contenido h3 {
+    color: #ef4444;
+    margin-top: 0;
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+}
+
+.modal-botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 15px;
+}
+
+.boton-peligro {
+    background-color: var(--acento);
+    color: var(--texto);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.boton-peligro:hover {
+    box-shadow: 0 0 5px var(--acento);
+}
+
+.boton-secundario {
+    background-color: transparent;
+    color: #94a3b8;
+    border: 1px solid #94a3b8;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+}
+.boton-secundario:hover {
+    color: white;
+    border-color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
