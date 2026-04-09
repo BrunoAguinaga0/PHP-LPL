@@ -68,6 +68,33 @@ if ($_SESSION['config_partida']['estado'] === 'jugando') {
         </div>
     </div>
 </div>
+<div id="modal-final" class="modal-overlay">
+    <div class="modal-contenido final-game">
+        <header class="modal-header-resultado">
+            <h2 id="resultado-titulo">RESULTADO</h2>
+            <div class="divisor-neon"></div>
+        </header>
+        <section class="seccion-ranking">
+            <h4>RANKING TOP 5 TRIPULANTES</h4>
+            <table class="tabla-ranking">
+                <thead>
+                    <tr>
+                        <th>Rango</th>
+                        <th>Usuario</th>
+                        <th>Tiempo</th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-cuerpo">
+                    </tbody>
+            </table>
+        </section>
+        <footer class="modal-footer-final">
+            <button onclick="window.location.href='inicio.php'" class="boton-inicio">
+                <i class="fas fa-home"></i> VOLVER AL INICIO
+            </button>
+        </footer>
+    </div>
+</div>
 <script>
     window.CONFIG_BATALLA = {
         filas: <?php echo $_SESSION['config_partida']['filas']; ?>,

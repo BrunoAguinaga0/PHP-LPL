@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="../Assets/CSS/modal.css?v=<?php echo time(); ?>">
 </head>
 <body>
-    <div id="modal" class="modal-overlay">
-        <div class="modal-contenido">
-            <h3>Termino la partida</h3>
-            <p>¿Estas seguro de que quieres abandonar la batalla? Esto contara como una derrota en tu historial.</p>
-            <div class="modal-botones">
-                <button id="btn-confirmar-rendicion" class="boton-peligro">Volver al inicio</button>
-            </div>    
-        </div>
-    </div>
+<section class="seccion-ranking">
+            <h4>🏆 TOP 5 COMANDANTES</h4>
+            <table class="tabla-ranking">
+                <thead>
+                    <tr>
+                        <th>Rango</th>
+                        <th>Usuario</th>
+                        <th>Tiempo</th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-cuerpo">
+                    </tbody>
+            </table>
+        </section>
 </body>
 </html>
 

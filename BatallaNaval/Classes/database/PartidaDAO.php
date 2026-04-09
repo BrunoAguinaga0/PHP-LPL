@@ -27,7 +27,8 @@ class PartidaDAO{
         }
     
     public function rankingTop5(){
-        $sql = "SELECT * FROM partidas WHERE resultado = 'victoria' ORDER BY tiempo_segundos ASC LIMIT 5";
+        $sql = "SELECT u.nombre_jugador, p.tiempo_segundos FROM partidas p
+        INNER JOIN jugadores u ON p.id_jugador = u.id_jugador WHERE p.resultado = 'victoria' ORDER BY p.tiempo_segundos ASC LIMIT 5";
         return $this->bd->bd_consulta($sql);
     }
 }

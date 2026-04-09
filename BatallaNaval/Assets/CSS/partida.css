@@ -283,3 +283,85 @@ body {
     border-color: white;
     background-color: rgba(255, 255, 255, 0.1);
 }
+
+
+.modal-contenido.final-game {
+    max-width: 550px;
+    border: 2px solid #22d3ee;
+    background: linear-gradient(145deg, #0f172a, #1e293b);
+    padding: 40px;
+}
+
+#resultado-titulo {
+    font-size: 3rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.victoria-texto { color: #22d3ee; text-shadow: 0 0 20px #22d3ee; }
+.derrota-texto { color: #ef4444; text-shadow: 0 0 20px #ef4444; }
+
+.divisor-neon {
+    height: 4px;
+    width: 100%;
+    background: #22d3ee;
+    margin: 15px 0 30px;
+    box-shadow: 0 0 10px #22d3ee;
+}
+
+.seccion-ranking {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.tabla-ranking {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla-ranking th {
+    color: #94a3b8;
+    text-align: left;
+    padding-bottom: 10px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.tabla-ranking td {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: 'Courier New', monospace;
+}
+
+/* Resaltar al Nro 1 */
+.tabla-ranking tr:first-child td {
+    color: #fbbf24; /* Dorado */
+    font-weight: bold;
+}
+
+.boton-inicio {
+    background: #22d3ee;
+    color: #0f172a;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.boton-inicio:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4);
+}
+
+h4{
+    margin-top: 0%;
+}

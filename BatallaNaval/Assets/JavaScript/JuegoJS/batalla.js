@@ -36,7 +36,8 @@ if (config.estado === 'victoria' || config.estado === 'derrota' || config.estado
     turno = false;
     contenedorIA.style.opacity = "0.7";
     clearInterval(intervaloCronometro); 
-    alert("Esta partida ya ha concluido. ¡Ve al menú para iniciar otra!");
+    upper
+    finalizarPartidaVisual(config.estado.toUpperCase());
 }
 
 Object.entries(config.historialFlota).forEach(([tipoBarco, barcosGuardados]) => {
@@ -67,9 +68,8 @@ if (btnConfirmar) {
         .then(respuesta => respuesta.json())
         .then(data => {
             if (data.estado === "abandonada") {
-                
                 clearInterval(intervaloCronometro);
-                turno = false;
+                finalizarPartidaVisual('ABANDONADA');
             }
         })
         .catch(error => {
@@ -109,7 +109,7 @@ contenedorIA.addEventListener('click', (e) => {
         }
         if(data.victoria){
         clearInterval(intervaloCronometro);
-        console.log("Victoria");}
+        finalizarPartidaVisual('VICTORIA');}
     })
     .catch(error => {console.log(error), turno = true;});
 })
@@ -135,9 +135,7 @@ function llamarAtaqueIA() {
             }
             if (data.victoria_ia) {
                 clearInterval(intervaloCronometro);
-                setTimeout(() => {
-                    alert("¡DERROTA! La computadora ha destruido tu flota.");
-                }, 300);
+                finalizarPartidaVisual('DERROTA');
                 return;
             }
         });
@@ -153,4 +151,29 @@ function actualizarCronometro() {
     if (elementoCronometro) {
         elementoCronometro.textContent = `${minutosFormateados}:${segundosFormateados}`;
     }
+}
+
+
+function finalizarPartidaVisual(resultado) {
+    const modalFinal = document.getElementById('modal-final');
+    const titulo = document.getElementById('resultado-titulo');
+    titulo.innerText = resultado;
+    titulo.className = (resultado === 'VICTORIA') ? 'victoria-texto' : 'derrota-texto';
+    fetch('../Backend/ranking.php', { method: 'POST' })
+    .then(res => res.json())
+    .then(ranking => {
+        const cuerpo = document.getElementById('ranking-cuerpo');
+        cuerpo.innerHTML = ""; 
+        ranking.forEach((jugador, index) => {
+            const fila = `
+                <tr>
+                    <td>#${index + 1}</td>
+                    <td>${jugador.nombre_jugador}</td>
+                    <td>${jugador.tiempo_segundos}s</td>
+                </tr>
+            `;
+            cuerpo.innerHTML += fila;
+        });
+        modalFinal.style.display = 'flex';
+    });
 }

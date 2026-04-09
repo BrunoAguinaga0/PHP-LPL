@@ -3,6 +3,7 @@ require_once "../Classes/entities/tablero.class.php";
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    unset($_SESSION['ia_memoria']);
     $tamanio = (int)$_POST['tamanio-tablero'];
     $filas = (int)$_POST['filas_tablero'];
     $columnas = (int)$_POST['columnas_tablero'];
