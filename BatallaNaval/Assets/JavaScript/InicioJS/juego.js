@@ -19,7 +19,7 @@ if (btnComoJugar && modalInstrucciones ) {
         modalInstrucciones.style.display = "flex";
     });
 
-    // Cerrar modal al hacer clic en el fondo oscuro
+    // Cerrar modal al hacer clic en el fondo
     window.addEventListener("click", (evento) => {
         if (evento.target === modalInstrucciones) {
             modalInstrucciones.style.display = "none";
@@ -106,9 +106,8 @@ contenedorTablero.addEventListener("click", function(evento) {
 // Envia los datos al backend y va hacia la pantalla de juego
 const formInicio = document.querySelector("#form-inicio");
 formInicio.addEventListener("submit", function(e) {
-    // 1. Convertimos los objetos y arrays a texto JSON
     const matrizTexto = JSON.stringify(Tablero); 
-    const historialTexto = JSON.stringify(historialFlota);    // 2. Los metemos en los inputs ocultos
+    const historialTexto = JSON.stringify(historialFlota);   
     const cantidades = {
         portaviones: historialFlota["portaviones"].length,
         acorazados: historialFlota["acorazados"].length,
@@ -170,7 +169,6 @@ function buscarEspacioDisponible(matriz, largo, orientacion) {
             }
         }
     }
-
     if (opcionesValidas.length > 0) {
         let indiceAleatorio = Math.floor(Math.random() * opcionesValidas.length);
         return opcionesValidas[indiceAleatorio];
