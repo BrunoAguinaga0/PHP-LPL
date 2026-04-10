@@ -57,7 +57,9 @@ body {
     grid-column: 8/10;
     grid-row: 1/3;
     display: flex;
-    justify-content: end;
+    justify-content: center;
+    align-items: end;
+    margin: 0.2rem;
 }
 
 .elemento4 {
@@ -226,7 +228,7 @@ button[name="cerrar-sesion"]:hover {
 }
 
 button[name="comenzar_partida"] {
-    background-color: #22d3ee99;
+    background-color: #1b7f8e99;
     color: var(--texto);
     border: 1px solid #0e485199;
     padding: 1rem 2rem;
@@ -238,11 +240,11 @@ button[name="comenzar_partida"] {
 }
 
 button[name="comenzar_partida"]:hover {
-    background-color:#13a0b6cb; 
+    background-color: #13a0b6cb; 
     color: white;
     border-color: #22d3ee99;
     transform: scale(1.05);
-    box-shadow: 0 0 50px rgba(34, 211, 238, 0.9);
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
 }
 
 .radios{
@@ -384,4 +386,77 @@ input[type="radio"] {
 
 .elemento {
     opacity: 0.85;
+}
+
+/* --- Estilos de la Modal --- */
+.modal-overlay {
+    display: none; /* Oculta por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro semitransparente */
+    z-index: 9999; /* Para que quede por encima de todo, incluso de los barcos flotantes */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: rgba(14, 35, 37, 0.5); /* Color oscuro naval */
+    border: 2px solid var(--acento); /* Borde neón */
+    border-radius: 10px;
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
+    color: white;
+    box-shadow: 0 0 10px rgba(54, 203, 168, 0.3);
+    position: relative;
+    font-family: sans-serif;
+}
+
+.modal-content h2 {
+    color: #ffd700;
+    text-align: center;
+    margin-top: 0;
+    text-shadow: 0 0 2px #ffd700;
+    margin-bottom: 1rem;
+}
+
+.texto-instrucciones p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-size: 1.1rem;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cerrar-modal:hover {
+    color: #ff4d4d; /* Se pone rojo al pasar el mouse */
+}
+
+#btn-como-jugar{
+    background-color: #1b7f8e99;
+    color: var(--texto);
+    width: 9rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--acento);
+}
+
+#btn-como-jugar:hover {
+    background-color:#13a0b6cb; 
+    color: white;
+    border-color: #22d3ee99;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
 }

@@ -1,10 +1,10 @@
+import { crearTablero, pintarFlota, pintarAyuda } from "../InicioJS/mostrarTablero.js";
 const config = window.CONFIG_BATALLA;
 const elementoCronometro = document.getElementById('timer');
 let segundosTranscurridos = config.segundosJugados || 0;
 actualizarCronometro();
 let intervaloCronometro;
 intervaloCronometro = setInterval(actualizarCronometro, 1000);
-import { crearTablero, pintarFlota } from "../InicioJS/mostrarTablero.js";
 crearTablero(config.filas, config.columnas, config.tamanio, 'contenedor-jugador');
 crearTablero(config.filas, config.columnas, config.tamanio, 'contenedor-ia');
 const contenedorIA = document.getElementById('contenedor-ia');
@@ -14,7 +14,22 @@ const rendirse = document.getElementById('rendirse');
 const modalRendirse = document.getElementById('modal-rendirse');
 const btnConfirmar = document.getElementById('btn-confirmar-rendicion');
 const btnCancelar = document.getElementById('btn-cancelar-rendicion');
+const btnAyuda = document.getElementById('pista');
+let mostrarAyuda = false;
 let turno = true;
+
+const btnRecord = document.getElementById('records');
+const records = document.getElementById('records-modal');
+btnRecord.addEventListener('click', () => {
+    records.style.display = 'flex';
+})
+
+window.addEventListener('click', (e) => {
+    if (e.target === records) {
+        records.style.display = 'none';
+    }
+    
+})
 
 
 //Si el usuario recarga la pagina no se pierda lo que hizo
@@ -36,7 +51,6 @@ if (config.estado === 'victoria' || config.estado === 'derrota' || config.estado
     turno = false;
     contenedorIA.style.opacity = "0.7";
     clearInterval(intervaloCronometro); 
-    upper
     finalizarPartidaVisual(config.estado.toUpperCase());
 }
 
@@ -54,6 +68,19 @@ Object.entries(config.historialFlota).forEach(([tipoBarco, barcosGuardados]) => 
 });
 
 
+btnAyuda.addEventListener('click', () => {
+    if(mostrarAyuda) return;
+    mostrarAyuda = true;
+    btnAyuda.style.cursor = "not-allowed";
+    fetch("../Backend/ayuda.php", {method: "POST"})
+    .then(respuesta => respuesta.json())
+    .then(data => {
+        if(data && data.fila !== null) {
+            pintarAyuda(data.fila, data.columna, contenedorIA);
+        };
+    })
+    .catch(error => console.log(error));
+});
 
 rendirse.addEventListener('click', () => {
         modalRendirse.style.display = 'flex'; 
@@ -139,7 +166,7 @@ function llamarAtaqueIA() {
                 return;
             }
         });
-    }, 1200); 
+    }, 600); 
 }
 
 function actualizarCronometro() {

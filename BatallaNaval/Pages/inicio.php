@@ -29,7 +29,13 @@
     if ($partida) {
         $resultado = $partida["resultado"];
         $minutos = intdiv($partida["tiempo_segundos"],60);
+        if($minutos < 10){
+            $minutos = "0" . $minutos;
+        }
         $segundos = $partida["tiempo_segundos"] % 60;
+        if($segundos < 10){
+            $segundos = "0" . $segundos;
+        }
         $anio = substr($partida["fecha_partida"],0,4);
         $mes = substr($partida["fecha_partida"],5,2);
         $dia = substr($partida["fecha_partida"],8,2);
@@ -67,6 +73,7 @@
                     <h1 class="titulo">BATALLA NAVAL</h1>
                 </div>
                 <div class="elemento elemento3">
+                    <button type="button" id="btn-como-jugar"; cursor: pointer;">¿Cómo Jugar?</button>
                 </div>
                 <div class="elemento elemento4">
                     <h3>Bienvenido a bordo <span class="nombre_resaltado">
@@ -91,6 +98,7 @@
                             <div class="contador-flota">
                                 <h1 id="cant-portaviones">1</h1>
                             </div>
+                            
                         </div>
                         <div class="flota-acorazados flota-comun">
                             <h3 class="h3-flota" style="color: red; text-shadow: 0 0 20px red; ">acorazados</h3>
@@ -162,11 +170,23 @@
                         <input type="hidden" name="columnas_tablero" id="input-columnas">
                         <input type="hidden" name="tamanio-tablero" id="input-tamanio">
                         <input type="hidden" name="cantidades_flota" id="input-cantidades">
-                        <button type="submit" name="comenzar_partida">Comenzar</button>
+                        <button id="boton-comenzar" type="submit" name="comenzar_partida">Comenzar</button>
                     </form>
                 </div>
         </div>
     </section>
+    <div id="modal-instrucciones" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Manual de Combate</h2>
+            <div class="texto-instrucciones">
+                <p><strong>1. Preparacion:</strong> Eligi el tamaño del mapa y configura tu flota.</p>
+                <p><strong>2. Despliegue:</strong> Hace clic en el tablero para tomar un barco y volve a hacer clic para soltarlo en una posición válida.</p>
+                <p><strong>3. Reglas de Fuego:</strong> Vos atacas primero. Si acertas a un barco, volves a disparar. Si disparas al agua, el turno pasa a la computadora.</p>
+                <p><strong>4. La CPU Cazadora:</strong> Si la computadora acierta a uno de tus barcos, dejará de tirar al azar y buscará en las casillas aledañas hasta hundirlo.</p>
+                <p><strong>5. Explosion de Ayuda:</strong> Podes usarlo <strong>una sola vez</strong> por partida. Va a revelar un barco enemigo por 15 segundos, pero como castigo, le revelará a la computadora la posición exacta de uno de tus barcos!</p>
+            </div>
+        </div>
+    </div>
     <script type="module" src="../Assets/JavaScript/InicioJS/juego.js"></script>
 </body>
 </html>

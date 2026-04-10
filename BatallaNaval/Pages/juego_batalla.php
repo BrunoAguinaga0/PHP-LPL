@@ -1,6 +1,7 @@
 <?php
 require_once "../Classes/entities/tablero.class.php";
-require_once "../Classes/entities/partida.class.php";
+require_once "../Classes/database/conexionBD.php";
+require_once "../Classes/database/JugadorDAO.php";
 session_start();
 if(!isset($_SESSION["id_usuario"]) && !isset($_COOKIE["recuerdame"])){
     header("Location: ../index.php");
@@ -14,7 +15,9 @@ $tableroIA = $_SESSION['tablero_ia'];
 $tableroJugador = $_SESSION['tablero_jugador'];
 $disparosAlEnemigo = $tableroIA->obtenerDisparos();
 $disparosDeIA = $tableroJugador->obtenerDisparos();
-
+$bd = new conexionBD();
+$jugador = new JugadorDAO($bd);
+$misRecords = $jugador->recordsJugador($_SESSION['id_usuario']);
 if (!isset($_SESSION['config_partida']['tiempo_inicio'])) {
     $_SESSION['config_partida']['tiempo_inicio'] = time();
 }
@@ -55,18 +58,51 @@ if ($_SESSION['config_partida']['estado'] === 'jugando') {
     <footer class="seccion-inferior">
         <div class="barra-acciones">
             <button id="rendirse" class="boton-accion">Rendirse</button>
+            <button id="pista" class="boton-accion pista">💣</button>
+            <button id="records" class="boton-accion">Records</button
         </div>
     </footer>
 </div>
+
 <div id="modal-rendirse" class="modal-overlay">
     <div class="modal-contenido">
         <h3>Alerta de Combate</h3>
-        <p>¿Estás seguro de que quieres abandonar la batalla? Esto contará como una derrota en tu historial.</p>
+        <p>¿Estás seguro de que queres abandonar la batalla? Esto contará como una derrota en tu historial.</p>
         <div class="modal-botones">
             <button id="btn-cancelar-rendicion" class="boton-secundario">Cancelar</button>
             <button id="btn-confirmar-rendicion" class="boton-peligro">Sí, rendirme</button>
         </div>
     </div>
+</div>
+
+<div class="modal-overlay" id="records-modal">
+<div class="panel-records-personales">
+    <h3 class="titulo-records">Mis Récords</h3>
+    
+    <?php if (empty($misRecords)): ?>
+        <p class="sin-records">Aún no tienes victorias registradas. ¡Gana esta partida para entrar al podio!</p>
+    <?php else: ?>
+        <table class="tabla-records">
+            <thead>
+                <tr>
+                    <th>Top</th>
+                    <th>Fecha</th>
+                    <th>Tiempo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($misRecords as $index => $record): ?>
+                    <tr>
+                        <td>#<?php echo $index + 1; ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($record['fecha_partida'])); ?></td>
+                        <td class="tiempo-resaltado"><?php echo $record['tiempo_segundos']; ?>s</td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+</div>
+
 </div>
 <div id="modal-final" class="modal-overlay">
     <div class="modal-contenido final-game">

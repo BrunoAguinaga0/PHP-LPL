@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $objTableroIA = new Tablero($filas, $columnas);
     $objTableroIA->inicializarAleatorio($cantidadesFlota);
     $_SESSION['tablero_jugador'] = $objTableroJugador;
+    $_SESSION["ayuda"] = false;
     $_SESSION['tablero_ia'] = $objTableroIA;
     $_SESSION['config_partida'] = [
         "tamanio" => $tamanio,

@@ -10,6 +10,22 @@ inicializarFlota();
 const fantasma = document.createElement("div");
 fantasma.id = "barco-fantasma";
 document.body.appendChild(fantasma);
+const btnComoJugar = document.getElementById("btn-como-jugar");
+const modalInstrucciones = document.getElementById("modal-instrucciones");
+
+if (btnComoJugar && modalInstrucciones ) {
+    // Abrir modal
+    btnComoJugar.addEventListener("click", () => {
+        modalInstrucciones.style.display = "flex";
+    });
+
+    // Cerrar modal al hacer clic en el fondo oscuro
+    window.addEventListener("click", (evento) => {
+        if (evento.target === modalInstrucciones) {
+            modalInstrucciones.style.display = "none";
+        }
+    });
+}
 
 // Evento para seguir al mouse
 document.addEventListener("mousemove", (e) => {
@@ -190,7 +206,6 @@ function intentarAgarrarBarco(fClick, cClick) {
     if (Tablero[fClick][cClick] !== 1) return;
     for (let tipo in historialFlota) {
         let listaBarcos = historialFlota[tipo];
-        
         for (let i = 0; i < listaBarcos.length; i++) {
             let barco = listaBarcos[i];
             let pertenece = false;
@@ -221,6 +236,7 @@ function intentarAgarrarBarco(fClick, cClick) {
                     bloque.classList.add("fantasma-celda", barcoEnMano.tipo);
                     fantasma.appendChild(bloque);
                 }
+                bloquearBoton(true);
                 return;
             }
         }
@@ -232,10 +248,10 @@ function intentarSoltarBarco(fClick, cClick) {
     if (esValido) {
         pintarFlota(fClick, cClick, barcoEnMano.tipo, barcoEnMano.orientacion, barcoEnMano.largo, contenedor);
         registrarFlota(barcoEnMano.tipo, fClick, cClick, barcoEnMano.largo, barcoEnMano.orientacion, Tablero);
-        
         barcoEnMano = null;
         fantasma.style.display = "none";
         document.body.style.cursor = "default";
+        bloquearBoton(false);
     } else {
         console.log("Posición inválida");
     }
@@ -266,4 +282,13 @@ export function validarLugarExacto(matriz, fila, columna, largo, orientacion) {
         }
     }
     return true; 
+}
+
+function bloquearBoton(bloquear){
+    radioTamanio.forEach(radio => {
+        radio.disabled = bloquear;
+    });
+    const btnComenzar = document.getElementById("boton-comenzar");
+    btnComenzar.disabled = bloquear;
+    
 }

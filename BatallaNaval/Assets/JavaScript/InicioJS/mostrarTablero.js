@@ -54,5 +54,16 @@ export function despintarFlota(tipoFlota, fila, columna, orientacion, largo){
     }
 }
 
+export function pintarAyuda(fila, columna, contenedor){
+    let celda;
+    celda = contenedor.querySelector(`.celda-previsualizacion[data-fila="${fila}"][data-columna="${columna}"]`);
+    if (celda){
+        celda.classList.add("celda-ayuda");
+        setTimeout(() => {
+            celda.classList.remove("celda-ayuda");
+        }, 15000);
+    }
+}
+
 
 

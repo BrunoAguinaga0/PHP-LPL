@@ -60,7 +60,7 @@ class Tablero {
     }
 
     //Registra la flota en la matriz
-    public function registrarFlota($fila, $columna, $largo, $orientacion) {
+    public function registrarFlota($fila, $columna, $largo, $orientacion, $tipo) {
         for ($i = 0; $i < $largo; $i++) {
             if ($orientacion == "horizontal") {
                 $this->matriz[$fila][$columna + $i] = 1;
@@ -68,6 +68,14 @@ class Tablero {
                 $this->matriz[$fila + $i][$columna] = 1;
             }
         }
+        $this->historialFlota[] = [
+            "tipo" => $tipo,
+            "fila" => $fila,
+            "columna" => $columna,
+            "largo" => $largo,
+            "orientacion" => $orientacion,
+            "hundido" => false
+        ];
     }
 
 
@@ -98,7 +106,7 @@ public function inicializarAleatorio($cantidades) {
                 $pos = $this->buscarEspacioDisponible($largo, $orientacion);
             }
             if ($pos !== null) {
-                $this->registrarFlota($pos['fila'], $pos['columna'], $largo, $orientacion);
+                $this->registrarFlota($pos['fila'], $pos['columna'], $largo, $orientacion, $tipo);
             }
         }
     }
@@ -134,25 +142,40 @@ public function inicializarAleatorio($cantidades) {
         }
         return false; // No hay más barcos (Game Over)
     }
+
     /* Devuelve un array solo con las coordenadas que fueron atacadas (2 y 3). */
-        public function obtenerDisparos() {
-            $disparos = [];
-            for ($f = 0; $f < $this->filas; $f++) {
-                for ($c = 0; $c < $this->columnas; $c++) {
-                    
-                    if ($this->matriz[$f][$c] == 2) {
-                        $disparos[] = ['f' => $f, 'c' => $c, 'tipo' => 'tocado'];
-                    } 
-                    elseif ($this->matriz[$f][$c] == 3) {
-                        $disparos[] = ['f' => $f, 'c' => $c, 'tipo' => 'agua'];
-                    }
-                    
+    public function obtenerDisparos() {
+        $disparos = [];
+        for ($f = 0; $f < $this->filas; $f++) {
+            for ($c = 0; $c < $this->columnas; $c++) {
+                
+                if ($this->matriz[$f][$c] == 2) {
+                    $disparos[] = ['f' => $f, 'c' => $c, 'tipo' => 'tocado'];
+                } 
+                elseif ($this->matriz[$f][$c] == 3) {
+                    $disparos[] = ['f' => $f, 'c' => $c, 'tipo' => 'agua'];
+                }
+                
+            }
+        }
+        
+        return $disparos;
+    }
+
+public function darAyuda(){
+        $posiblesAyudas = [];
+        for ($f = 0; $f < $this->filas; $f++) {
+            for ($c = 0; $c < $this->columnas; $c++) {
+                if ($this->matriz[$f][$c] == 1) {
+                    $posiblesAyudas[] = ['fila' => $f, 'columna' => $c];
                 }
             }
-            
-            return $disparos;
         }
+        if (count($posiblesAyudas) > 0) {
+            $indiceAleatorio = array_rand($posiblesAyudas);
+            return $posiblesAyudas[$indiceAleatorio];
+        }
+        return false; 
+    }
 }
-
-
 ?>

@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_SESSION['tablero_ia'])) {
 $fila = (int)$_POST['fila'];
 $columna = (int)$_POST['columna'];
 $tableroIA = $_SESSION['tablero_ia'];
-
 $resultado =  $tableroIA->recibirDisparo($fila,$columna);
 $respuesta = ["resultado" => $resultado,
                 "victoria" => false];

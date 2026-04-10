@@ -1,0 +1,53 @@
+body {
+	text-align: center;
+	margin-left: 38%;
+	margin-right: 38%;
+	background-color: black;
+	margin-top: 6%;
+}
+
+section {
+	color: white;
+	background-color: #0e0e0e;
+	border: solid #0084FF 1px;
+	border-radius: 30px;
+	padding-bottom: 10px;
+	width: 370px;
+	height: max-content;
+}
+
+h1 {
+	border-bottom: solid white;
+	display: inline-block;
+}
+
+
+input {
+	border: black;
+	border-radius: 10px;
+	text-align: center;
+	font-size: 15px;
+	height: 20px;
+	transition: 0.5s;
+}
+
+input:hover {
+	border: solid #0084FF 2px;
+}
+
+
+button {
+	height: 40px;
+	width: 150px;
+	margin-top: 6px;
+	border-radius: 8px;
+	color: white;
+	border: #0084FF;
+	background-color: #0084FF;
+	transition: height 0.4s, width 0.4s;
+	font-size: 18px;
+}
+
+button:hover {
+	width: 138px;
+}

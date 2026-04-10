@@ -49,7 +49,6 @@ if (isset($_SESSION["id_usuario"])) {
                     <input type="checkbox" id="remember" checked="checked" name="remember">
                     <label for="remember">Recuerdame</label>
                 </div>
-                <a href="Pages/recuperar.php">¿Olvidaste tu contraseña?</a>
             </div>
             <?php
                 if (isset($_SESSION["error_ingreso"])) {
