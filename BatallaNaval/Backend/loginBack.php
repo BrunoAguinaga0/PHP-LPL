@@ -2,6 +2,10 @@
 session_start();
 require_once "../Classes/database/conexionBD.php";
 require_once "../Classes/database/jugadorDAO.php";
+if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+    header("Location: ../index.php");
+    exit();
+}
 $bd = new conexionBD();
 $jugadorDAO = new JugadorDAO($bd);
 $usuario = $_POST['usuario'];

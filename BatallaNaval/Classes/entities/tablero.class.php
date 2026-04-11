@@ -158,7 +158,6 @@ public function inicializarAleatorio($cantidades) {
                 
             }
         }
-        
         return $disparos;
     }
 

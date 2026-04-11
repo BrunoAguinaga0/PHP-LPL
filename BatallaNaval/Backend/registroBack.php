@@ -2,11 +2,21 @@
 require_once '../Classes/database/conexionBD.php';
 require_once '../Classes/database/jugadorDAO.php';
 session_start();
+if (!isset($_POST['usuario']) || !isset($_POST['contrasenia']) || !isset($_POST['confirmar_contrasenia'])) {
+    header("Location: ../Pages/registro.php");
+    exit();
+}
+if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+    header("Location: ../Pages/registro.php");
+    exit();
+}
+
 $bd = new conexionBD();
 $jugadorDAO = new JugadorDAO($bd);
 $nombre = $_POST['usuario'];
 $pass1 = $_POST['contrasenia'];
 $pass2 = $_POST['confirmar_contrasenia'];
+
 if($pass1 !== $pass2){
     $_SESSION["error_contrasenia"] = "Marinero, las contraseñas no coinciden!";
     header("Location: ../Pages/registro.php");

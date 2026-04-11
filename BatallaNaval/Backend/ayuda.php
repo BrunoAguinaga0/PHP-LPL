@@ -1,6 +1,10 @@
 <?php
 require_once "../Classes/entities/tablero.class.php";
 session_start();
+if($_SERVER["REQUEST_METHOD"] !== "POST"){
+    header("Location: ../index.php");
+    exit();
+}
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['config_partida']['estado'] == 'jugando'){
     if($_SESSION['ayuda'] == false){

@@ -4,6 +4,10 @@
     require_once "../Classes/database/JugadorDAO.php";
     $bd = new conexionBD();
     $jugadorDAO = new JugadorDAO($bd);
+    if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+        header("Location: ../index.php");
+        exit();
+    }
     if (isset($_SESSION["id_usuario"])){
         $jugadorDAO->guardarToken($id_usuario,NULL);
         session_unset();
