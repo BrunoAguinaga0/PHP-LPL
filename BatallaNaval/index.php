@@ -14,9 +14,9 @@ require_once "Classes/database/jugadorDAO.php";
 if (!isset($_SESSION["id_usuario"]) && isset($_COOKIE["recuerdame"])){
     $bd = new conexionBD();
     $jugadorDAO = new JugadorDAO($bd);
-    $jugador = $jugadorDAO->obtener_jugador_token($_COOKIE["recuerdame"]);  
+    $jugador = $jugadorDAO->get_datos_recuerdame($_COOKIE["recuerdame"]);  
     $_SESSION["id_usuario"] = $jugador["id_jugador"];
-    $_SESSIOn["nombre_usuario"] = $jugador = ["nombre_jugador"];
+    $_SESSION["nombre_usuario"] = $jugador["nombre_jugador"];
     }
 if (isset($_SESSION["id_usuario"])) {
     header("Location: Pages/inicio.php");

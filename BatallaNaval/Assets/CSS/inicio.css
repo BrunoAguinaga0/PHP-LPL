@@ -335,6 +335,7 @@ input[type="radio"] {
 
 .flota{
     display: flex;
+    width: 80%;
     flex-direction: column;      
     gap: 1rem;
 }
@@ -344,6 +345,7 @@ input[type="radio"] {
     gap: 1rem;
     align-items: center;
     justify-content: center;
+    padding-left: 45px ;
 }
 
 .boton-sumres{
@@ -460,3 +462,33 @@ input[type="radio"] {
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
 }
+
+.btn-rotar {
+    background: transparent;
+    border: none; /* ¡ESTA ES LA LÍNEA QUE ELIMINA EL CUADRADO! */
+    color: white; /* Color normal del ícono */
+    cursor: pointer;
+    padding: 2px; /* Apenas un margen para que sea fácil hacerle clic */
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    outline: none; /* Evita el recuadro azul de Windows al hacer clic */
+}
+
+.btn-rotar:hover {
+    background: transparent; 
+    color: var(--acento, #36cba8); /* Solo cambia el color del ícono */
+}
+
+.icono-svg {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease, fill 0.3s ease; 
+}
+
+/* El giro sobre su propio eje */
+.btn-rotar:hover .icono-svg {
+    transform: rotate(120deg);
+}
+
+

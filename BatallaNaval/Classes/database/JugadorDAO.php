@@ -36,15 +36,6 @@ class JugadorDAO{
         $resultado = $this->bd->bd_consulta($sql, "s", [$nombre]);
         return count($resultado) > 0;
     }
-//Devuelve el token del jugador de la cookie recuerdame
-    public function obtener_jugador_token($token){
-        $sql = "SELECT id_jugador FROM jugadores WHERE token_recuerdame = ? LIMIT 1";
-        $resultado = $this->bd->bd_consulta($sql, "s", [$token]);
-        if (!empty($resultado)) {
-            return $resultado[0];
-        }
-        return null;
-    }
 
 //Guarda el token de la cookie recuerdame
     public function guardarToken($id_jugador, $token){

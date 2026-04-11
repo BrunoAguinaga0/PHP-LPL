@@ -4,15 +4,55 @@ let contenedor = document.querySelector("#elemento5");
 let barcoEnMano = null;
 let filas = 10, columnas = 10, tamanio = 1;
 let orientaciones = ["horizontal", "vertical"];
+let miFlota = [
+    { tipo: "portaviones", largo: 4, cantidad: 1, orientacion: "horizontal" },
+    { tipo: "acorazados",  largo: 3, cantidad: 2, orientacion: "horizontal" },
+    { tipo: "destructores", largo: 2, cantidad: 3, orientacion: "horizontal" },
+    { tipo: "submarinos",  largo: 1, cantidad: 4, orientacion: "horizontal" }
+];
 crearTablero(filas,columnas,1, "elemento5");
 let Tablero = crearMatriz(filas, columnas);
-inicializarFlota();
+inicializarFlota(miFlota);
 const fantasma = document.createElement("div");
 fantasma.id = "barco-fantasma";
 document.body.appendChild(fantasma);
 const btnComoJugar = document.getElementById("btn-como-jugar");
 const modalInstrucciones = document.getElementById("modal-instrucciones");
 
+
+
+
+// ================================================ EVENTOS ======================================================//
+const botonesRotar = document.querySelectorAll('.btn-rotar');
+botonesRotar.forEach(boton => {
+    boton.addEventListener('click', (e) => {
+        // 1. Identificamos qué barco queremos rotar (ej: "acorazados")
+        const tipoBarco = boton.getAttribute('data-tipo');
+        
+        // 2. Buscamos ese barco en nuestra variable global
+        let barcoEncontrado = miFlota.find(b => b.tipo === tipoBarco);
+        
+        if (barcoEncontrado) {
+            // 3. Le invertimos la orientación en el estado global
+            if (barcoEncontrado.orientacion === 'horizontal') {
+                barcoEncontrado.orientacion = 'vertical';
+            } else {
+                barcoEncontrado.orientacion = 'horizontal';
+            }
+            
+            // 4. Mandamos a redibujar todo el tablero/muelle
+            crearTablero(filas, columnas,tamanio, "elemento5");
+            Tablero = crearMatriz(filas, columnas);
+            resertContadorFlota();
+            resetFlota();
+            inicializarFlota(miFlota);
+        }
+    });
+});
+
+
+
+//Muestra las instrucciones del juego
 if (btnComoJugar && modalInstrucciones ) {
     // Abrir modal
     btnComoJugar.addEventListener("click", () => {
@@ -27,18 +67,31 @@ if (btnComoJugar && modalInstrucciones ) {
     });
 }
 
-// Evento para seguir al mouse
+// Clickear flota
+const contenedorTablero = document.querySelector(".elemento5");
+contenedorTablero.addEventListener("click", function(evento) {
+    const celdaClickeada = evento.target.closest("div[data-fila]");
+    if (!celdaClickeada) return; // Si se clickeo un borde o algo vacio no hacemos nada
+    let filaClick = parseInt(celdaClickeada.dataset.fila);
+    let columnaClick = parseInt(celdaClickeada.dataset.columna);
+    if (barcoEnMano === null) {
+        intentarAgarrarBarco(filaClick, columnaClick);
+    } else {
+        intentarSoltarBarco(filaClick, columnaClick);
+    }
+});
+
+// Mover el barco fantasma
 document.addEventListener("mousemove", (e) => {
     if (barcoEnMano) {
         fantasma.style.display = "flex";
-        // Si es vertical, los ponemos uno abajo del otro
         fantasma.style.flexDirection = barcoEnMano.orientacion === "horizontal" ? "row" : "column";
-        
         // Posicionamos el div en las coordenadas del mouse
         fantasma.style.left = `${e.clientX + 10}px`;
         fantasma.style.top = `${e.clientY + 10}px`;
     }
 });
+
 
 // Cambiar el tamaño del tablero.
 const radioTamanio = document.querySelectorAll("input[name='radio']");
@@ -56,9 +109,10 @@ radioTamanio.forEach(radio => {
         Tablero = crearMatriz(filas, columnas);
         resertContadorFlota();
         resetFlota();
-        inicializarFlota();
+        inicializarFlota(miFlota);
     })
 })
+
 
 // Sumar-Restar una flota
 const sumres = document.querySelectorAll(".boton-sumres");
@@ -89,19 +143,6 @@ sumres.forEach(boton => {
     })
 });
 
-// Clickear flota
-const contenedorTablero = document.querySelector(".elemento5");
-contenedorTablero.addEventListener("click", function(evento) {
-    const celdaClickeada = evento.target.closest("div[data-fila]");
-    if (!celdaClickeada) return; // Si se clickeo un borde o algo vacio no hacemos nada
-    let filaClick = parseInt(celdaClickeada.dataset.fila);
-    let columnaClick = parseInt(celdaClickeada.dataset.columna);
-    if (barcoEnMano === null) {
-        intentarAgarrarBarco(filaClick, columnaClick);
-    } else {
-        intentarSoltarBarco(filaClick, columnaClick);
-    }
-});
 
 // Envia los datos al backend y va hacia la pantalla de juego
 const formInicio = document.querySelector("#form-inicio");
@@ -125,6 +166,10 @@ formInicio.addEventListener("submit", function(e) {
     console.log(tamanio);
 });
 
+
+
+
+// ================================================ FUNCIONES ======================================================//
 function crearMatriz(filas, columnas) {
     let matriz = Array.from({ length: filas }, () => Array(columnas).fill(0));
     return matriz;
@@ -176,25 +221,17 @@ function buscarEspacioDisponible(matriz, largo, orientacion) {
     return null; 
 }
 
-function inicializarFlota() {
-    const barcosAponer = [
-        { tipo: "portaviones", largo: 4, cantidad: 1 },
-        { tipo: "acorazados",  largo: 3, cantidad: 2 },
-        { tipo: "destructores", largo: 2, cantidad: 3 },
-        { tipo: "submarinos",  largo: 1, cantidad: 4 }
-    ];
+function inicializarFlota(barcosAponer) {
     barcosAponer.forEach(barco => {
         for (let i = 0; i < barco.cantidad; i++) {
-            let indice = Math.floor(Math.random() * 2);
-            let orientacion = orientaciones[indice];
-            let posicion = buscarEspacioDisponible(Tablero, barco.largo, orientacion);
+            let posicion = buscarEspacioDisponible(Tablero, barco.largo, barco.orientacion);
             if (!posicion) {
-                orientacion = (orientacion === "horizontal") ? "vertical" : "horizontal";
-                posicion = buscarEspacioDisponible(Tablero, barco.largo, orientacion);
+                barco.orientacion = (barco.orientacion === "horizontal") ? "vertical" : "horizontal";
+                posicion = buscarEspacioDisponible(Tablero, barco.largo, barco.orientacion);
             }
             if (posicion) {
-                registrarFlota(barco.tipo, posicion.fila, posicion.columna, barco.largo, orientacion, Tablero);
-                pintarFlota(posicion.fila, posicion.columna, barco.tipo, orientacion, barco.largo, contenedor);
+                registrarFlota(barco.tipo, posicion.fila, posicion.columna, barco.largo, barco.orientacion, Tablero);
+                pintarFlota(posicion.fila, posicion.columna, barco.tipo, barco.orientacion, barco.largo, contenedor);
         }    
     }
     });
@@ -286,6 +323,9 @@ function bloquearBoton(bloquear){
     radioTamanio.forEach(radio => {
         radio.disabled = bloquear;
     });
+    botonesRotar.forEach(boton => {
+        boton.disabled = bloquear;
+    })
     const btnComenzar = document.getElementById("boton-comenzar");
     btnComenzar.disabled = bloquear;
     
